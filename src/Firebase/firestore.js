@@ -21,6 +21,6 @@ export const addPost = (post) => addDoc (collection(db, "documents"), {
 });
 
 
-export {collection, onSnapshot}
+export{collection, onSnapshot};
 
 
