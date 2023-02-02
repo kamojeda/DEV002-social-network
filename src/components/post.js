@@ -1,29 +1,24 @@
-/* import { getDocContent, getPosts, onSnapshot, collection } from "../Firebase/firestore.js";
+/* import { get , getPosts, onGetPosts, collection, addPost } from "../Firebase/firestore.js";
 import { db } from "../Firebase/firebaseConfig.js";
-import { auth, viewer } from "../Firebase/firebase.js";
-import { feed } from "../components/feed.js";
+import { auth, viewer } from "../Firebase/firebase.js"; 
+import { feed } from "../components/feed.js"; */
+ 
 
-
-
-const postList = document.querySelector("post-feed");
-
-export const postPrint = (doc) => {
-    const timelineContainer = document.createElement("div");
-    timelineContainer.innerHTML = `
-    <div class="headerPost"> 
-    <p class="userNamePost">${doc.name}</p>
-    <i class="fa-solid fa-ellipsis-vertical"></i>
-    </div> 
-
-    <p class="postContent">${doc.post}</p>
-    <button class="buttonPost">Publicar</button>
+ export const postPrint = (doc) => {
+    let docs = doc.data()
+    let postValue =  `
+    <div class = "postContent">
+    <div id = "userNamePost" class="userNamePost"> usuario ${docs.user} </div>
+    <div id = "postContainer" class= "postContainer"> contenido del post ${docs.post} </div>
+    </div>
+    <div class = "buttonsPosts">
+    <button class = "buttonDelete" data-id="${doc.id}">eliminar</button>
+    <button class = "buttonEdit" data-id="${doc.id}">editar</button>
+    </div>
     `
-    postList.appendChild(timelineContainer);
-};
+    //console.log(doc.id)
+   return postValue
+     
+ }
 
-
-db.collection('documents').get().then(snapshot => {
-    snapshot.docs.forEach(doc => {
-        postPrint(doc);
-    });
-}); */
+ 
