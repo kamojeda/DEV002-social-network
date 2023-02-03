@@ -31,6 +31,9 @@ export const getDisplayName = (userNameFromRegister) =>
 export const signInWithPass = (auth, email, password) =>
 	signInWithEmailAndPassword(auth, email, password);
 
+//obtener currentUser
+export const userSignedIn = () => auth.currentUser
+
 export const currentUser = {};
 export const viewer = () => {
 	onAuthStateChanged(auth, (user) => {

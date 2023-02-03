@@ -1,6 +1,6 @@
 import { toNavigate } from "../main.js";
 import { register } from "../components/register.js";
-import { auth, logout, viewer } from "../Firebase/firebase.js";
+import { auth, logout, userSignedIn, viewer } from "../Firebase/firebase.js";
 import {
 	addPost,
 	onGetPosts,
@@ -10,9 +10,10 @@ import {
 	collection,
 	db,
 	onSnapshot,
-	deletePost, query, orderBy, onGetDates,
+	deletePost, query, orderBy, onGetDates, giveLike, dislike, getPost
 } from "../Firebase/firestore.js";
 import { postPrint } from "./post.js";
+
 
 export const feed = () => {
 	//Creamos elementos del Feed
@@ -56,23 +57,27 @@ export const feed = () => {
 	newPostContainer.appendChild(newPostButton);
 	feedDiv.appendChild(postFeed);
 
-    window.addEventListener('DOMContentLoaded', async () => {
 
-        const queryRef = query(collection(db, 'documents'), orderBy('createdAt', 'desc'));
-        console.log(queryRef)
-        onSnapshot(queryRef, (querySnapshot) => {
-            postFeed.innerHTML = ''
-            querySnapshot.forEach(doc => {
-                const postDiv = document.createElement('div')
-                //console.log(doc.data())
-                postDiv.className = "postDiv"
-                const printedPost = postPrint(doc)
-                postDiv.innerHTML = printedPost
-                postFeed.appendChild(postDiv)
-                //postDiv.innerHTML += `
-                //<div class = post"> ${doc.data().post}</div>
-                //`              
-            });
+
+	window.addEventListener('DOMContentLoaded', async () => {
+
+		const queryRef = query(collection(db, 'documents'), orderBy('createdAt', 'desc'));
+		//console.log(queryRef)
+		onSnapshot(queryRef, (querySnapshot) => {
+			postFeed.innerHTML = ''
+			querySnapshot.forEach(doc => {
+				const postDiv = document.createElement('div')
+				//console.log(doc.data())
+				postDiv.className = "postDiv"
+				const printedPost = postPrint(doc)
+				postDiv.innerHTML = printedPost
+				postFeed.appendChild(postDiv)
+				//postDiv.innerHTML += `
+				//<div class = post"> ${doc.data().post}</div>
+				//`              
+			});
+
+			const userSignedId = userSignedIn().uid;
 
 			const btnDelete = postFeed.querySelectorAll(".buttonDelete");
 			btnDelete.forEach((btn) => {
@@ -84,6 +89,33 @@ export const feed = () => {
 					}
 				});
 			});
+
+			const btnLike = postFeed.querySelectorAll('.buttonLike');
+			btnLike.forEach((btn) => {
+				btn.addEventListener("click", async (e) => {
+					try {
+						const id = e.target.dataset.id
+						const post = await getPost(id);
+						const dbLikes = post.data().likes						
+						//const r = post.data()
+						const currentLike = dbLikes.indexOf(userSignedId);
+						
+						if (currentLike === -1){
+							giveLike(id, userSignedId);
+							console.log("boton like", currentLike + "currentLike", id)
+						
+						} 
+						else{
+							dislike(id, userSignedId)
+							console.log("boton dislike", currentLike + "currentLike", id)
+						}
+								
+					}
+					catch (error) {
+						console.log(error)
+					}
+				})
+			})
 		});
 	});
 

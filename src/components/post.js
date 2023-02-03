@@ -14,6 +14,7 @@ import { feed } from "../components/feed.js"; */
     <div class = "buttonsPosts">
     <button class = "buttonDelete" data-id="${doc.id}">eliminar</button>
     <button class = "buttonEdit" data-id="${doc.id}">editar</button>
+    <button class = "buttonLike" data-id="${doc.id}">like</button>
     </div>
     `
     //console.log(doc.id)
