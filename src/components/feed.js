@@ -10,7 +10,10 @@ import {
 	collection,
 	db,
 	onSnapshot,
-	deletePost, query, orderBy, onGetDates,
+	deletePost,
+	query,
+	orderBy,
+	onGetDates,
 } from "../Firebase/firestore.js";
 import { postPrint } from "./post.js";
 
@@ -56,23 +59,25 @@ export const feed = () => {
 	newPostContainer.appendChild(newPostButton);
 	feedDiv.appendChild(postFeed);
 
-    window.addEventListener('DOMContentLoaded', async () => {
-
-        const queryRef = query(collection(db, 'documents'), orderBy('createdAt', 'desc'));
-        console.log(queryRef)
-        onSnapshot(queryRef, (querySnapshot) => {
-            postFeed.innerHTML = ''
-            querySnapshot.forEach(doc => {
-                const postDiv = document.createElement('div')
-                //console.log(doc.data())
-                postDiv.className = "postDiv"
-                const printedPost = postPrint(doc)
-                postDiv.innerHTML = printedPost
-                postFeed.appendChild(postDiv)
-                //postDiv.innerHTML += `
-                //<div class = post"> ${doc.data().post}</div>
-                //`              
-            });
+	window.addEventListener("DOMContentLoaded", async () => {
+		const queryRef = query(
+			collection(db, "documents"),
+			orderBy("createdAt", "desc")
+		);
+		console.log(queryRef);
+		onSnapshot(queryRef, (querySnapshot) => {
+			postFeed.innerHTML = "";
+			querySnapshot.forEach((doc) => {
+				const postDiv = document.createElement("div");
+				//console.log(doc.data())
+				postDiv.className = "postDiv";
+				const printedPost = postPrint(doc);
+				postDiv.innerHTML = printedPost;
+				postFeed.appendChild(postDiv);
+				//postDiv.innerHTML += `
+				//<div class = post"> ${doc.data().post}</div>
+				//`
+			});
 
 			const btnDelete = postFeed.querySelectorAll(".buttonDelete");
 			btnDelete.forEach((btn) => {
@@ -84,9 +89,42 @@ export const feed = () => {
 					}
 				});
 			});
+
+			const btnEdit = postFeed.querySelectorAll(".buttonEdit");
+			btnEdit.forEach((btn) => {
+				btn.addEventListener("click", async ({ target: { dataset } }) => {
+					try {
+						await deletePost(dataset.id);
+					} catch (error) {
+						console.log(error);
+					}
+				});
+			});
 		});
 	});
+	// const buttonsEditPost = containerTimeLine.querySelectorAll(".buttonEdit");
+	// buttonsEditPost.forEach((buttonEdit) => {
+	// 	console.log(buttonEdit);
+	// 	buttonEdit.addEventListener("click", async (e) => {
+	// 		const doc = await getPost(e.target.dataset.id);
+	// 		const postData = doc.data();
 
+	// 		postContent.removeChild(div);
+	// 		const editPostInput = document.createElement("textarea");
+	// 		editPostInput.classList = "editPostContent";
+	// 		const editPostButton = document.createElement("button");
+	// 		editPostButton.textContent = "Guardar";
+	// 		newPostContainer.appendChild(newPostInput);
+	// 		newPostContainer.appendChild(newPostButton);
+	// 		textAreaNewPost.value = postData.postContent;
+	// 		inputLocation.value = postData.location;
+
+	// 		editPostStatus = true;
+	// 		id = e.target.dataset.id;
+
+	// 		buttonPost.textContent = "Guardar";
+	// 	});
+	// });
 	buttonSignOut.addEventListener("click", () => toNavigate("/"));
 	buttonSignOut.addEventListener("click", async (e) => {
 		e.preventDefault(); //cancela comportamiento por defecto de refrescar la pagina
