@@ -78,7 +78,7 @@ export const feed = () => {
 			});
 
 			const userSignedId = userSignedIn().uid;
-
+						
 			const btnDelete = postFeed.querySelectorAll(".buttonDelete");
 			btnDelete.forEach((btn) => {
 				btn.addEventListener("click", async ({ target: { dataset } }) => {
@@ -97,17 +97,17 @@ export const feed = () => {
 						const id = e.target.dataset.id
 						const post = await getPost(id);
 						const dbLikes = post.data().likes						
-						//const r = post.data()
+						console.log(dbLikes)
 						const currentLike = dbLikes.indexOf(userSignedId);
 						
 						if (currentLike === -1){
 							giveLike(id, userSignedId);
-							console.log("boton like", currentLike + "currentLike", id)
+							console.log("boton like", currentLike + "currentLike")
 						
 						} 
 						else{
 							dislike(id, userSignedId)
-							console.log("boton dislike", currentLike + "currentLike", id)
+							console.log("boton dislike", currentLike + "currentLike")
 						}
 								
 					}
