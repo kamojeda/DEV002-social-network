@@ -8,9 +8,9 @@ import {
 	userCollection,
 	getPosts,
 	collection,
-	db,
+	db,	
 	onSnapshot,
-	deletePost, query, orderBy, onGetDates, giveLike, dislike, getPost
+	deletePost, query, orderBy, onGetDates, giveLike, dislike, getPost, doc
 } from "../Firebase/firestore.js";
 import { postPrint } from "./post.js";
 
@@ -90,29 +90,37 @@ export const feed = () => {
 				});
 			});
 
+
+
+
 			const btnLike = postFeed.querySelectorAll('.buttonLike');
 			btnLike.forEach((btn) => {
 				btn.addEventListener("click", async (e) => {
 					try {
 						const id = e.target.dataset.id
-						const post = await getPost(id);
-						const dbLikes = post.data().likes						
-						console.log(dbLikes)
-						const currentLike = dbLikes.indexOf(userSignedId);
+						const dataPost = await getPost(id);		
+						const post = dataPost.data();						
+						console.log(id, userSignedId)
+
+						const currentLike = post.likes.indexOf(userSignedId);
+						console.log("post: ", post, "post.likes: ", post.likes)
+						//console.log(currentLike)
+						//console.log("dbLikes.lenght", dbLikes.length, "dbLikes"+dbLikes, "currentLike", currentLike)
 						
 						if (currentLike === -1){
-							giveLike(id, userSignedId);
-							console.log("boton like", currentLike + "currentLike")
-						
+							//console.log("like funct")
+							giveLike(id, userSignedId);							
+							console.log("boton like", currentLike + " currentLike")						
 						} 
-						else{
-							dislike(id, userSignedId)
-							console.log("boton dislike", currentLike + "currentLike")
+						else {
+							console.log("dislike funct")
+							dislike(id, userSignedId)							
+							 console.log("boton dislike", currentLike + "currentLike")
 						}
 								
 					}
 					catch (error) {
-						console.log(error)
+						console.log("catch del error", error)
 					}
 				})
 			})

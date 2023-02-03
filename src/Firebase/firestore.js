@@ -48,7 +48,7 @@ export const savePost = (postContent, location) =>
 
 export const giveLike = (id, newLike) => {
 	updateDoc(doc(db, 'documents', id), {
-		likes:
+		"likes":
 			arrayUnion(
 				newLike,
 			),
@@ -70,4 +70,4 @@ export const dislike = (id, oldLike) => {
 export const updatePost = (id, newDocPost) =>
 	updateDoc(doc(db, "posts", id), newDocPost);
 
-export { collection, onSnapshot, db, query, orderBy }
+export { collection, onSnapshot, db, query, orderBy, doc }

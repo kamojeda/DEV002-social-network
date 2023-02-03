@@ -17,7 +17,7 @@ import { feed } from "../components/feed.js"; */
     <button class = "buttonLike" data-id="${doc.id}">like</button>
     </div>
     `
-    //console.log(doc.id)
+    //console.log(docs, "doc" + doc.id)    
    return postValue
      
  }
