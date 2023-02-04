@@ -1,6 +1,6 @@
 import { toNavigate } from "../main.js";
 import { register } from "../components/register.js";
-import { auth, logout, viewer } from "../Firebase/firebase.js";
+import { auth, logout, viewer, userSignedIn } from "../Firebase/firebase.js";
 import {
 	addPost,
 	onGetPosts,
@@ -63,12 +63,25 @@ export const feed = () => {
 
 	let editPostStatus = false;
 	let id = "";
+
 	window.addEventListener("DOMContentLoaded", async () => {
 		const queryRef = query(
 			collection(db, "documents"),
 			orderBy("createdAt", "desc")
 		);
 		console.log(queryRef);
+		//const userSignedId = userSignedIn().uid;
+
+		const postOptions = document.querySelectorAll("button.button-p");
+		const userOwnPost = () => {
+			postOptions.forEach((item) => {
+				getDocContent(item.dataset.uid).then((actualUserId) => {
+					const userData = userOwnPost.data().id;
+					console.log(userData);
+				});
+			});
+		};
+		userOwnPost();
 
 		newPostContainer.addEventListener("submit", (e) => {
 			e.preventDefault();
@@ -81,11 +94,11 @@ export const feed = () => {
 
 		onSnapshot(queryRef, (querySnapshot) => {
 			postFeed.innerHTML = "";
-			querySnapshot.forEach((doc) => {
+			querySnapshot.forEach((item) => {
 				const postDiv = document.createElement("div");
 				//console.log(doc.data())
 				postDiv.className = "postDiv";
-				const printedPost = postPrint(doc);
+				const printedPost = postPrint(item);
 				postDiv.innerHTML = printedPost;
 				postFeed.appendChild(postDiv);
 				//postDiv.innerHTML += `

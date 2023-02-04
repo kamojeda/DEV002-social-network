@@ -11,15 +11,16 @@ export const postPrint = (doc) => {
     <div id = "postContainer" class= "postContainer"> contenido del post ${docs.post} </div>
     </div>
     <form id = "formEditTextArea" class= "formEditTextArea" style= "display:none"> 
-    <textArea id = "editTextArea" class= "editTextArea" > contenido del post ${docs.post} </textArea>
+    <textArea id = "editTextArea" class= "editTextArea" > contenido del post ${doc.post} </textArea>
     <button class = "buttonSaveEdit" id = "buttonSaveEdit" data-id="${doc.id}">Guardar</button>
     </form>
     
     <div class = "buttonsPosts">
-    <button class = "buttonDelete" data-id="${doc.id}">Eliminar</button>
-    <button class = "buttonEdit" data-id="${doc.id}">Editar</button>
+    <button class = "buttonDelete button-p" data-id="${doc.id}">Eliminar</button>
+    <button class = "buttonEdit button-p" data-id="${doc.id}">Editar</button>
     </div>
     `;
+
 	//console.log(doc.id)
 	return postValue;
 };
