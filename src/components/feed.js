@@ -1,21 +1,21 @@
 import { toNavigate } from "../main.js";
 import { register } from "../components/register.js";
-import { auth, logout, viewer, userSignedIn } from "../Firebase/firebase.js";
+import { auth, logout, userSignedIn, viewer } from "../Firebase/firebase.js";
 import {
 	addPost,
-	onGetPosts,
-	postCollection,
-	userCollection,
-	getPosts,
 	collection,
 	db,
 	onSnapshot,
 	deletePost,
-	getDocContent,
+	onGetPosts,
 	editPost,
 	query,
 	orderBy,
 	onGetDates,
+	giveLike,
+	dislike,
+	getPost,
+	doc,
 } from "../Firebase/firestore.js";
 import { postPrint } from "../components/post.js";
 
@@ -94,6 +94,8 @@ export const feed = () => {
 				//`
 			});
 
+			const userSignedId = userSignedIn().uid;
+
 			const btnDelete = postFeed.querySelectorAll(".buttonDelete");
 			btnDelete.forEach((btn) => {
 				btn.addEventListener("click", async ({ target: { dataset } }) => {
@@ -108,7 +110,7 @@ export const feed = () => {
 			const btnEdit = postFeed.querySelectorAll(".buttonEdit");
 			btnEdit.forEach((btn) => {
 				btn.addEventListener("click", async (e) => {
-					const doc = await getDocContent(e.target.dataset.id);
+					const doc = await onGetPosts(e.target.dataset.id);
 					const postData = doc.data();
 					// console.log(postData);
 					const postArea = document.getElementById("postContainer");
@@ -138,6 +140,35 @@ export const feed = () => {
 						postArea.style.display = "block";
 						formEditingArea.style.display = "none";
 					});
+				});
+			});
+
+			const btnLike = postFeed.querySelectorAll(".buttonLike");
+			btnLike.forEach((btn) => {
+				btn.addEventListener("click", async (e) => {
+					try {
+						const id = e.target.dataset.id;
+						const dataPost = await getPost(id);
+						const post = dataPost.data();
+						console.log(id, userSignedId);
+
+						const currentLike = post.likes.indexOf(userSignedId);
+						console.log("post: ", post, "post.likes: ", post.likes);
+						//console.log(currentLike)
+						//console.log("dbLikes.lenght", dbLikes.length, "dbLikes"+dbLikes, "currentLike", currentLike)
+
+						if (currentLike === -1) {
+							//console.log("like funct")
+							giveLike(id, userSignedId);
+							console.log("boton like", currentLike + " currentLike");
+						} else {
+							console.log("dislike funct");
+							dislike(id, userSignedId);
+							console.log("boton dislike", currentLike + "currentLike");
+						}
+					} catch (error) {
+						console.log("catch del error", error);
+					}
 				});
 			});
 		});

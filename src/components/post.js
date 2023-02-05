@@ -18,10 +18,10 @@ export const postPrint = (doc) => {
     <div class = "buttonsPosts">
     <button class = "buttonDelete button-p" data-id="${doc.id}">Eliminar</button>
     <button class = "buttonEdit button-p" data-id="${doc.id}">Editar</button>
-    </div>
-    `;
+    <button class = "buttonLike" data-id="${doc.id}">like</button>
 
-	//console.log(doc.id)
+    </div>
+    `; //console.log(doc.id)
 	return postValue;
 };
 
