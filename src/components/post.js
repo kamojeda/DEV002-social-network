@@ -8,17 +8,17 @@ export const postPrint = (doc) => {
 	let postValue = `
     <div class = "postContent" id = "idPostContent">
     <div id = "userNamePost" class="userNamePost">  ${docs.uid} usuario ${docs.user} </div>
-    <div id = "postContainer" class= "postContainer"> contenido del post ${docs.post} </div>
+    <div id = "postContainer-${doc.id}" class= "postContainer"> contenido del post ${docs.post} </div>
     </div>
 
-    <form id = "formEditTextArea" class= "formEditTextArea" style= "display:none"> 
-    <textArea id = "editTextArea" class= "editTextArea" > contenido del post ${doc.post} </textArea>
-    <button class = "buttonSaveEdit" id = "buttonSaveEdit" data-id="${doc.id}">Guardar</button>
+    <form id = "formEditTextArea-${doc.id}" class= "formEditTextArea" style= "display:none"> 
+    <textArea id = "editTextArea-${doc.id}" class= "editTextArea" > contenido del post ${doc.post} </textArea>
+    <button id = "buttonSaveEdit-${doc.id}" class = "buttonSaveEdit" data-id="${doc.id}">Guardar</button>
     </form>
     
     <div class = "buttonsPosts" id = "idButtonsPosts${doc.id}" style= "display:none">
     <button class = "buttonDelete button-p" data-id="${doc.id}">Eliminar</button>
-    <button class = "buttonEdit button-p" data-id="${doc.id}">Editar</button>
+    <button id = "buttonEdit-${doc.id}" class = "buttonEdit button-p" data-id="${doc.id}">Editar</button>
     </div>
 
     <div class = "buttonsLikePosts">

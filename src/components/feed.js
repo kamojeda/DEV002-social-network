@@ -102,6 +102,9 @@ export const feed = () => {
 					const buttonsOwnPosts = document.getElementById(idPost);
 					buttonsOwnPosts.style.display = "block";
 				}
+
+				listenEditButton(item);
+				listenSaveButton(item);
 			});
 
 			const btnDelete = postFeed.querySelectorAll(".buttonDelete");
@@ -115,7 +118,7 @@ export const feed = () => {
 				});
 			});
 
-			const btnEdit = postFeed.querySelectorAll(".buttonEdit");
+			/*const btnEdit = postFeed.querySelectorAll(".buttonEdit");
 			btnEdit.forEach((btn) => {
 				btn.addEventListener("click", async (e) => {
 					const doc = await getPost(e.target.dataset.id);
@@ -149,7 +152,7 @@ export const feed = () => {
 						formEditingArea.style.display = "none";
 					});
 				});
-			});
+			});*/
 
 			const btnLike = postFeed.querySelectorAll(".buttonLike");
 			btnLike.forEach((btn) => {
@@ -194,4 +197,34 @@ export const feed = () => {
 	});
 
 	return feedDiv;
+};
+
+const listenEditButton = (post) => {
+	const editButton = document.getElementById("buttonEdit-" + post.id);
+	const postArea = document.getElementById("postContainer-" + post.id);
+	const editPostTextArea = document.getElementById("editTextArea-" + post.id);
+	const formEditingArea = document.getElementById("formEditTextArea-" + post.id);
+
+	editButton.addEventListener("click", () => {
+		postArea.style.display = "none"; // to hide
+		formEditingArea.style.display = "block"; // to show
+
+		editPostTextArea.value = post.data().post;
+	});
+};
+
+const listenSaveButton = (post) => {
+	const saveButton = document.getElementById("buttonSaveEdit-" + post.id);
+	const postArea = document.getElementById("postContainer-" + post.id);
+	const formEditingArea = document.getElementById("formEditTextArea-" + post.id);
+	const editPostTextArea = document.getElementById("editTextArea-" + post.id);
+
+	saveButton.addEventListener("click", (e) => {
+		e.preventDefault();
+		const postContent = editPostTextArea.value;
+		editPost(post.id, { post: postContent });
+
+		postArea.style.display = "block";
+		formEditingArea.style.display = "none";
+	});
 };
