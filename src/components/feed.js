@@ -70,18 +70,6 @@ export const feed = () => {
 			orderBy("createdAt", "desc")
 		);
 		console.log(queryRef);
-		//const userSignedId = userSignedIn().uid;
-
-		const postOptions = document.querySelectorAll("button.button-p");
-		const userOwnPost = () => {
-			postOptions.forEach((item) => {
-				getDocContent(item.dataset.uid).then((actualUserId) => {
-					const userData = userOwnPost.data().id;
-					console.log(userData);
-				});
-			});
-		};
-		userOwnPost();
 
 		newPostContainer.addEventListener("submit", (e) => {
 			e.preventDefault();
