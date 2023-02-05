@@ -27,7 +27,9 @@ export const signUpWithPass = async (auth, email, password, displayName) => {
 		});
 };
 export const getDisplayName = (userNameFromRegister) =>
-	updateProfile(auth.currentUser, { displayName: userNameFromRegister });
+	updateProfile(auth.currentUser, {
+		displayName: userNameFromRegister,
+	});
 export const signInWithPass = (auth, email, password) =>
 	signInWithEmailAndPassword(auth, email, password);
 

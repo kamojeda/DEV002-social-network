@@ -1,7 +1,15 @@
 import { toNavigate } from "../main.js";
 import { register } from "../components/register.js";
-import { auth, logout, userSignedIn, viewer } from "../Firebase/firebase.js";
 import {
+	auth,
+	currentUser,
+	logout,
+	userSignedIn,
+	viewer,
+	getDisplayName,
+} from "../Firebase/firebase.js";
+import {
+	getFirestore,
 	addPost,
 	collection,
 	db,
@@ -68,8 +76,8 @@ export const feed = () => {
 		const queryRef = query(
 			collection(db, "documents"),
 			orderBy("createdAt", "desc")
+			//authCredentials(currentUser)
 		);
-		console.log(queryRef);
 
 		newPostContainer.addEventListener("submit", (e) => {
 			e.preventDefault();
@@ -81,20 +89,21 @@ export const feed = () => {
 		});
 
 		onSnapshot(queryRef, (querySnapshot) => {
+			//console.log(currentUser.uid);
 			postFeed.innerHTML = "";
 			querySnapshot.forEach((item) => {
 				const postDiv = document.createElement("div");
-				//console.log(doc.data())
+
 				postDiv.className = "postDiv";
 				const printedPost = postPrint(item);
 				postDiv.innerHTML = printedPost;
 				postFeed.appendChild(postDiv);
-				//postDiv.innerHTML += `
-				//<div class = post"> ${doc.data().post}</div>
-				//`
+				if (auth.currentUser.uid == item.data().uid) {
+					const idPost = "idButtonsPosts" + item.id;
+					const buttonsOwnPosts = document.getElementById(idPost);
+					buttonsOwnPosts.style.display = "block";
+				}
 			});
-
-			const userSignedId = userSignedIn().uid;
 
 			const btnDelete = postFeed.querySelectorAll(".buttonDelete");
 			btnDelete.forEach((btn) => {
@@ -112,7 +121,7 @@ export const feed = () => {
 				btn.addEventListener("click", async (e) => {
 					const doc = await onGetPosts(e.target.dataset.id);
 					const postData = doc.data();
-					// console.log(postData);
+					console.log(postData);
 					const postArea = document.getElementById("postContainer");
 					const editPostTextArea = document.getElementById("editTextArea");
 					const formEditingArea = document.getElementById("formEditTextArea");

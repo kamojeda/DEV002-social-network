@@ -66,4 +66,4 @@ export const dislike = (id, oldLike) => {
 export const updatePost = (id, newDocPost) =>
 	updateDoc(doc(db, "posts", id), newDocPost);
 
-export { collection, onSnapshot, db, query, orderBy, doc };
+export { collection, onSnapshot, db, query, orderBy, doc, getFirestore };
