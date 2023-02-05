@@ -27,8 +27,6 @@ export const getPosts = () => getDocs(collection(db, "documents"));
 export const deletePost = (id) => deleteDoc(doc(db, "documents", id));
 export const onGetPosts = (callback) =>
 	onSnapshot(collection(db, "documents"), callback);
-export const onGetDates = (q, callback) =>
-	onSnapshot(collection(db, "documents"), callback);
 export const editPost = (id, newPost) =>
 	updateDoc(doc(db, "documents", id), newPost);
 export const addPost = (post) =>

@@ -19,7 +19,6 @@ import {
 	editPost,
 	query,
 	orderBy,
-	onGetDates,
 	giveLike,
 	dislike,
 	getPost,
@@ -119,7 +118,7 @@ export const feed = () => {
 			const btnEdit = postFeed.querySelectorAll(".buttonEdit");
 			btnEdit.forEach((btn) => {
 				btn.addEventListener("click", async (e) => {
-					const doc = await onGetPosts(e.target.dataset.id);
+					const doc = await getPost(e.target.dataset.id);
 					const postData = doc.data();
 					console.log(postData);
 					const postArea = document.getElementById("postContainer");
