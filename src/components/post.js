@@ -12,11 +12,13 @@ import { feed } from "../components/feed.js"; */
     <div id = "postContainer" class= "postContainer"> contenido del post ${docs.post} </div>
     </div>
     <div class = "buttonsPosts">
-    <button class = "buttonDelete" data-id="${doc.id}">eliminar</button>
+    <button class = "buttonDelete" id = "idButtonDelete" data-id="${doc.id}">eliminar</button>
     <button class = "buttonEdit" data-id="${doc.id}">editar</button>
     </div>
     `
     //console.log(doc.id)
+
+
    return postValue
      
  }

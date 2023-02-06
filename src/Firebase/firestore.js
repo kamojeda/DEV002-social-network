@@ -30,11 +30,8 @@ export const addPost = (post) => addDoc (collection(db, "documents"), {
     uid: auth.currentUser.uid,
     likes: [],
     createdAt: serverTimestamp() 
-
 });
 
-
-
-export { collection, onSnapshot, db, query, orderBy }
+export { collection, onSnapshot, db, query, orderBy, auth }
 
 

@@ -1,6 +1,6 @@
 import { toNavigate } from "../main.js";
 import { register } from "../components/register.js";
-import { auth, logout, viewer } from "../Firebase/firebase.js";
+import { auth, logout, viewer, currentUser } from "../Firebase/firebase.js";
 import {
 	addPost,
 	onGetPosts,
@@ -45,6 +45,7 @@ export const feed = () => {
 	const postFeed = document.createElement("section");
 	postFeed.className = "post-feed";
 
+
 	feedDiv.appendChild(header);
 	header.appendChild(imgHeader);
 	header.appendChild(inputSearchHeader);
@@ -56,32 +57,36 @@ export const feed = () => {
 	newPostContainer.appendChild(newPostButton);
 	feedDiv.appendChild(postFeed);
 
-    window.addEventListener('DOMContentLoaded', async () => {
+	window.addEventListener('DOMContentLoaded', async () => {
 
-        const queryRef = query(collection(db, 'documents'), orderBy('createdAt', 'desc'));
-        console.log(queryRef)
-        onSnapshot(queryRef, (querySnapshot) => {
-            postFeed.innerHTML = ''
-            querySnapshot.forEach(doc => {
-                const postDiv = document.createElement('div')
-                //console.log(doc.data())
-                postDiv.className = "postDiv"
-                const printedPost = postPrint(doc)
-                postDiv.innerHTML = printedPost
-                postFeed.appendChild(postDiv)
-                //postDiv.innerHTML += `
-                //<div class = post"> ${doc.data().post}</div>
-                //`              
-            });
+		const queryRef = query(collection(db, 'documents'), orderBy('createdAt', 'desc'));
+		console.log(queryRef)
+		onSnapshot(queryRef, (querySnapshot) => {
+			postFeed.innerHTML = ''
+			querySnapshot.forEach(doc => {
+				const postDiv = document.createElement('div')
+				//console.log(doc.data())
+				postDiv.className = "postDiv"
+				const printedPost = postPrint(doc)
+				postDiv.innerHTML = printedPost
+				postFeed.appendChild(postDiv)
+				//postDiv.innerHTML += `
+				//<div class = post"> ${doc.data().post}</div>
+				//`              
+			});
 
 			const btnDelete = postFeed.querySelectorAll(".buttonDelete");
 			btnDelete.forEach((btn) => {
-				btn.addEventListener("click", async ({ target: { dataset } }) => {
+				btn.addEventListener("click", async ({ target: { dataset} }) => {
 					try {
-						await deletePost(dataset.id);
+						const deleteConfirm = confirm("¿estás seguro de eliminar la publicación?")
+						if (deleteConfirm === true) {
+							await deletePost(dataset.id);
+						}
 					} catch (error) {
 						console.log(error);
 					}
+
 				});
 			});
 		});
