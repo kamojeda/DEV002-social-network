@@ -1,6 +1,5 @@
 import { toNavigate } from "../main.js";
-import { auth, viewer, signInWithPass } from "../Firebase/firebase.js";
-import { register } from "../components/register.js";
+import { auth } from "../Firebase/firebase.js";
 
 export const registerOk = () => {
 	const user = auth.currentUser;

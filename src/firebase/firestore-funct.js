@@ -1,11 +1,11 @@
 //import { app } from '../Firebase/firebaseConfig.js';
-import { db } from "../Firebase/firebaseConfig.js";
 import {
 	getFirestore,
+	db,
+	auth,
 	getDoc,
 	getDocs,
 	doc,
-	setDoc,
 	collection,
 	deleteDoc,
 	updateDoc,
@@ -16,9 +16,7 @@ import {
 	orderBy,
 	arrayUnion,
 	arrayRemove,
-} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
-
-import { auth } from "./firebase.js";
+} from "./firebase.js";
 
 export const userCollection = () => getDocs(collection(db, "usuarios"));
 export const postCollection = () => getDocs(collection(db, "posts"));
@@ -65,4 +63,4 @@ export const dislike = (docId, oldLike) => {
 export const updatePost = (id, newDocPost) =>
 	updateDoc(doc(db, "posts", id), newDocPost);
 
-export { collection, onSnapshot, db, query, orderBy, doc, getFirestore };
+export { collection, onSnapshot, query, orderBy, doc, getFirestore };

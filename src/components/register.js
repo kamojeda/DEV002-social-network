@@ -1,5 +1,6 @@
 import { toNavigate } from "../main.js";
-import { auth, signUpWithPass, viewer } from "../Firebase/firebase.js";
+import { auth } from "../Firebase/firebase.js";
+import { signUpWithPass } from "../Firebase/auth-func.js";
 //import { getFirestore } from "../src/firebase/firestore.js";
 
 export const register = () => {

@@ -1,28 +1,18 @@
 import { toNavigate } from "../main.js";
-import { register } from "../components/register.js";
+import { auth, db } from "../Firebase/firebase.js";
+import { logout, userSignedIn } from "../Firebase/auth-func.js";
 import {
-	auth,
-	logout,
-	userSignedIn,
-	viewer,
-	getDisplayName,
-} from "../Firebase/firebase.js";
-import {
-	getFirestore,
 	addPost,
 	collection,
-	db,
 	onSnapshot,
 	deletePost,
-	onGetPosts,
 	editPost,
 	query,
 	orderBy,
 	giveLike,
 	dislike,
 	getPost,
-	doc,
-} from "../Firebase/firestore.js";
+} from "../firebase/firestore-funct.js";
 import { postPrint } from "../components/post.js";
 
 export const feed = () => {

@@ -1,11 +1,6 @@
 import { toNavigate } from "../main.js";
-import {
-	auth,
-	signInWithPass,
-	viewer,
-	provider,
-	popUpGoogle,
-} from "../Firebase/firebase.js";
+import { auth, provider } from "../Firebase/firebase.js";
+import { signInWithPass, viewer, popUpGoogle } from "../Firebase/auth-func.js";
 
 export const home = () => {
 	//Creamos elementos del Formulario
