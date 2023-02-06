@@ -100,34 +100,34 @@ export const feed = () => {
 				//listenLikeButton(item);
 			});
 
-			// const btnLike = allPostsContainer.querySelectorAll(".buttonLike");
-			// btnLike.forEach((btn) => {
-			// 	btn.addEventListener("click", async (e) => {
-			// 		try {
-			// 			const id = e.target.dataset.id;
-			// 			const dataPost = await getPost(id);
-			// 			const post = dataPost.data();
-			// 			console.log(id, userSignedId);
+			const btnLike = allPostsContainer.querySelectorAll(".buttonLike");
+			btnLike.forEach((btn) => {
+				btn.addEventListener("click", async (e) => {
+					try {
+						const id = e.target.dataset.id;
+						const dataPost = await getPost(id);
+						const post = dataPost.data();
+						console.log(id, userSignedId);
 
-			// 			const userWhoCurrentLike = post.likes.indexOf(userSignedId);
-			// 			console.log("post: ", post, "post.likes: ", post.likes);
-			// 			//console.log(userWhoCurrentLike)
-			// 			//console.log("dbLikes.lenght", dbLikes.length, "dbLikes"+dbLikes, "userWhoCurrentLike", userWhoCurrentLike)
+						const userWhoCurrentLike = post.likes.indexOf(userSignedId);
+						console.log("post: ", post, "post.likes: ", post.likes);
+						//console.log(userWhoCurrentLike)
+						//console.log("dbLikes.lenght", dbLikes.length, "dbLikes"+dbLikes, "userWhoCurrentLike", userWhoCurrentLike)
 
-			// 			if (userWhoCurrentLike === -1) {
-			// 				//console.log("like funct")
-			// 				giveLike(id, userSignedId);
-			// 				console.log("boton like", userWhoCurrentLike + " userWhoCurrentLike");
-			// 			} else {
-			// 				console.log("dislike funct");
-			// 				dislike(id, userSignedId);
-			// 				console.log("boton dislike", userWhoCurrentLike + "userWhoCurrentLike");
-			// 			}
-			// 		} catch (error) {
-			// 			console.log("catch del error", error);
-			// 		}
-			// 	});
-			// });
+						if (userWhoCurrentLike === -1) {
+							//console.log("like funct")
+							giveLike(id, userSignedId);
+							console.log("boton like", userWhoCurrentLike + " userWhoCurrentLike");
+						} else {
+							console.log("dislike funct");
+							dislike(id, userSignedId);
+							console.log("boton dislike", userWhoCurrentLike + "userWhoCurrentLike");
+						}
+					} catch (error) {
+						console.log("catch del error", error);
+					}
+				});
+			});
 		});
 	});
 
@@ -193,60 +193,3 @@ const listenSaveEditionButton = (post) => {
 		formEditingArea.style.display = "none";
 	});
 };
-
-// const listenLikeButton = (post) => {
-// 	const likeButton = document.querySelectorAll(".buttonLike");
-// 	//console.log(likeButton);
-// 	likeButton.forEach((btn) => {
-// 		btn.addEventListener("click", async (e) => {
-// 			//const userWhoCurrentLike = post.data().uid; //id del usuario a quien le pertenece el post.
-// 			const currentPostLiked = post.id; //id del post que fue likeado (id)
-// 			const currentUser = auth.currentUser.uid; //id del usuario en linea
-// 			//const dataPost = await getPost(currentPostLiked);
-// 			//const posting = dataPost.data();
-// 			// console.log(userWhoCurrentLike);
-// 			// console.log(currentPostLiked);
-// 			console.log(currentUser);
-// 			// console.log(dataPost, posting);
-// 			//const id = e.target.dataset.id;
-// 			//const dataPost = await getPost(id);
-
-// 			// 	console.log(id, userSignedId);
-
-// 			//const queSoy = post.data().likes.indexOf(currentUser);
-// 			//console.log(queSoy);
-// 			// 	console.log("post: ", post, "post.likes: ", post.likes);
-// 			// 	//console.log(userWhoCurrentLike)
-// 			// 	//console.log("dbLikes.lenght", dbLikes.length, "dbLikes"+dbLikes, "userWhoCurrentLike", userWhoCurrentLike)
-
-// 			// 	if (userWhoCurrentLike === -1) {
-// 			// 		//console.log("like funct")
-// 			// 		giveLike(id, userSignedId);
-// 			// 		console.log("boton like", userWhoCurrentLike + " userWhoCurrentLike");
-// 			// 	} else {
-// 			// 		console.log("dislike funct");
-// 			// 		dislike(id, userSignedId);
-// 			// 		console.log("boton dislike", userWhoCurrentLike + "userWhoCurrentLike");
-// 			// 	}
-// 			// } catch (error) {
-// 			// 	console.log("catch del error", error);
-// 			// }
-// 			if (currentPostLiked && currentUser) {
-// 				//console.log("like funct")
-// 				getPost(currentPostLiked)
-// 				.then(item) => {
-// 					const postData = item.data();
-// 					if(!postData.arra){
-
-// 					}
-// 				}
-// 				giveLike(currentPostLiked, userWhoCurrentLike);
-// 				console.log("boton like", userWhoCurrentLike + " userWhoCurrentLike");
-// 			} else {
-// 				console.log("dislike funct");
-// 				await dislike(id, post.uid);
-// 				console.log("boton dislike", userWhoCurrentLike + "userWhoCurrentLike");
-// 			}
-// 		});
-// 	});
-// };
