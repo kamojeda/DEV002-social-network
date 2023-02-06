@@ -37,7 +37,7 @@
     z-index: -1;
     inset: 0;
     background: white;
-    opacity: .8;
+    opacity: .9;
     position: absolute;
 }
 
@@ -120,4 +120,5 @@
     text-align: center;
     background-color: var(--secondary-red);
     margin-bottom: 70px;
+    font-size: 17px;
 }

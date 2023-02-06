@@ -39,7 +39,7 @@
     z-index: -1;
     inset: 0;
     background: white;
-    opacity: .8;
+    opacity: .9;
     position: absolute;
 }
 
@@ -59,10 +59,10 @@
     grid-row-end: 2;
     display: flex;
     flex-direction: column;
-    align-items:center;
+    align-items: center;
     justify-content: center;
     margin-top: 90px;
-    
+
 }
 
 .register-form {
@@ -71,7 +71,7 @@
     align-items: center;
     justify-content: space-evenly;
     margin: 20px;
-    
+
 
 }
 
@@ -83,6 +83,8 @@
     margin-top: 0px;
     padding: 7px;
     text-align: left;
+    font-style: italic;
+    font-size: 14px;
 }
 
 .input-City-User {
@@ -92,6 +94,9 @@
     border-radius: 15px;
     margin-top: 0px;
     padding: 7px;
+    text-align: left;
+    font-style: italic;
+    font-size: 14px;
 }
 
 .input-Mail-User {
@@ -101,6 +106,9 @@
     border-radius: 15px;
     margin-top: 0px;
     padding: 7px;
+    text-align: left;
+    font-style: italic;
+    font-size: 14px;
 }
 
 .input-Pass-User {
@@ -110,6 +118,9 @@
     border-radius: 15px;
     margin-top: 0px;
     padding: 7px;
+    text-align: left;
+    font-style: italic;
+    font-size: 14px;
 }
 
 .input-Check-Pass {
@@ -119,39 +130,43 @@
     border-radius: 15px;
     margin-top: 0px;
     padding: 7px;
+    text-align: left;
+    font-style: italic;
+    font-size: 14px;
 }
 
 .userName {
     font-size: 16px;
     font-weight: bold;
     margin-top: 13px;
+
 }
 
-.userCity{
+.userCity {
     font-size: 16px;
     font-weight: bold;
     margin-top: 13px;
 }
 
-.userMail{
+.userMail {
     font-size: 16px;
     font-weight: bold;
     margin-top: 13px;
 }
 
-.userPassword{
+.userPassword {
     font-size: 16px;
     font-weight: bold;
     margin-top: 13px;
 }
 
-.userCheckPass{
+.userCheckPass {
     font-size: 16px;
     font-weight: bold;
     margin-top: 13px;
 }
 
-.label-user-select{
+.label-user-select {
     font-size: 16px;
     font-weight: bold;
     margin-top: 13px;
@@ -170,18 +185,18 @@
 
 #selectVegan,
 option {
-    background-color: var(--main-color-two) ;
+    background-color: var(--main-color-two);
     border-radius: 15px;
 }
 
 .button-Register {
     width: 270px;
-  height: 40px;
-  border-radius: 30px;
-  color: var(--neutral-font);
-  font-size: 18px;
-  font-weight: bold;
-  border-style: none;
+    height: 40px;
+    border-radius: 30px;
+    color: var(--neutral-font);
+    font-size: 18px;
+    font-weight: bold;
+    border-style: none;
     margin: 30px;
     background-color: var(--main-color);
 }

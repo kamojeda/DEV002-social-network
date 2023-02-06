@@ -48,19 +48,17 @@ export const savePost = (postContent, location) =>
 //export const getPosts = () => getDocs(postCollection);
 //export const onGetPosts = (callback) => onSnapshot(postCollection, callback);
 
-export const giveLike = (id, likes, newLike) => {
-	updateDoc(doc(db, "documents", id), {
-		numberLikes: likes,
-		arrayLikes: arrayUnion(newLike),
+export const giveLike = (docId, newLike) => {
+	updateDoc(doc(db, "documents", docId), {
+		likes: arrayUnion(newLike),
 	});
 	// .then(() => console.log("+1 like"))
 	// .catch((error) => console.error("Error", error));
 };
 
-export const dislike = (id, likes, oldLike) => {
-	updateDoc(doc(db, "documents", id), {
-		numberLikes: likes,
-		arrayLikes: arrayRemove(oldLike),
+export const dislike = (docId, oldLike) => {
+	updateDoc(doc(db, "documents", docId), {
+		likes: arrayRemove(oldLike),
 	});
 };
 

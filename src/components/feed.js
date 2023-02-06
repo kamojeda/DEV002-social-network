@@ -2,7 +2,6 @@ import { toNavigate } from "../main.js";
 import { register } from "../components/register.js";
 import {
 	auth,
-	currentUser,
 	logout,
 	userSignedIn,
 	viewer,
@@ -68,8 +67,6 @@ export const feed = () => {
 	formNewPostContainer.appendChild(buttonNewPost);
 	feedDiv.appendChild(allPostsContainer);
 
-	let id = "";
-
 	window.addEventListener("DOMContentLoaded", async () => {
 		const queryRef = query(
 			collection(db, "documents"),
@@ -99,7 +96,8 @@ export const feed = () => {
 				listenDeleteButton(item);
 				//listenLikeButton(item);
 			});
-
+			const userSignedId = userSignedIn().uid;
+			console.log(userSignedId);
 			const btnLike = allPostsContainer.querySelectorAll(".buttonLike");
 			btnLike.forEach((btn) => {
 				btn.addEventListener("click", async (e) => {
@@ -109,19 +107,19 @@ export const feed = () => {
 						const post = dataPost.data();
 						console.log(id, userSignedId);
 
-						const userWhoCurrentLike = post.likes.indexOf(userSignedId);
+						const currentLike = post.likes.indexOf(userSignedId);
 						console.log("post: ", post, "post.likes: ", post.likes);
-						//console.log(userWhoCurrentLike)
-						//console.log("dbLikes.lenght", dbLikes.length, "dbLikes"+dbLikes, "userWhoCurrentLike", userWhoCurrentLike)
+						//console.log(currentLike)
+						//console.log("dbLikes.lenght", dbLikes.length, "dbLikes"+dbLikes, "currentLike", currentLike)
 
-						if (userWhoCurrentLike === -1) {
+						if (currentLike === -1) {
 							//console.log("like funct")
 							giveLike(id, userSignedId);
-							console.log("boton like", userWhoCurrentLike + " userWhoCurrentLike");
+							console.log("boton like", currentLike + " currentLike");
 						} else {
 							console.log("dislike funct");
 							dislike(id, userSignedId);
-							console.log("boton dislike", userWhoCurrentLike + "userWhoCurrentLike");
+							console.log("boton dislike", currentLike + "currentLike");
 						}
 					} catch (error) {
 						console.log("catch del error", error);
@@ -160,7 +158,10 @@ const listenPublishButton = () => {
 const listenDeleteButton = (post) => {
 	const deleteButton = document.getElementById("buttonDelete-" + post.id);
 	deleteButton.addEventListener("click", async () => {
-		await deletePost(post.id);
+		const deleteConfirm = confirm("¿estás seguro de eliminar la publicación?");
+		if (deleteConfirm === true) {
+			await deletePost(post.id);
+		}
 	});
 };
 

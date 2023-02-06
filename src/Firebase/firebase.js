@@ -51,6 +51,7 @@ export const viewer = () => {
 		}
 	});
 };
+
 export const logout = (auth) => signOut(auth);
 export const popUpGoogle = (auth, provider) => signInWithPopup(auth, provider);
 
