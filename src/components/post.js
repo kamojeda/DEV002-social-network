@@ -17,12 +17,13 @@ export const postPrint = (doc) => {
     </form>
     
     <div class = "buttonsPosts" id = "idButtonsPosts${doc.id}" style= "display:none">
-    <button class = "buttonDelete button-p" data-id="${doc.id}">Eliminar</button>
+    <button class = "buttonDelete button-p" id = "buttonDelete-${doc.id}" data-id="${doc.id}">Eliminar</button>
     <button id = "buttonEdit-${doc.id}" class = "buttonEdit button-p" data-id="${doc.id}">Editar</button>
     </div>
 
     <div class = "buttonsLikePosts">
-    <button class = "buttonLike" data-id="${doc.id}">like</button>
+    <button class = "buttonLike" id = "buttonLike" data-id="${doc.id}">like</button>
+    <span class = "likeCounter">
     </div>
     `; //console.log(doc.id)
 	return postValue;

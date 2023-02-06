@@ -24,6 +24,7 @@ export const userCollection = () => getDocs(collection(db, "usuarios"));
 export const postCollection = () => getDocs(collection(db, "posts"));
 export const getPost = (id) => getDoc(doc(db, "documents", id));
 export const getPosts = () => getDocs(collection(db, "documents"));
+export const getPostData = (id) => getDoc(doc(db, "documents", id));
 export const deletePost = (id) => deleteDoc(doc(db, "documents", id));
 export const onGetPosts = (callback) =>
 	onSnapshot(collection(db, "documents"), callback);
@@ -47,17 +48,19 @@ export const savePost = (postContent, location) =>
 //export const getPosts = () => getDocs(postCollection);
 //export const onGetPosts = (callback) => onSnapshot(postCollection, callback);
 
-export const giveLike = (id, newLike) => {
+export const giveLike = (id, likes, newLike) => {
 	updateDoc(doc(db, "documents", id), {
-		likes: arrayUnion(newLike),
+		numberLikes: likes,
+		arrayLikes: arrayUnion(newLike),
 	});
 	// .then(() => console.log("+1 like"))
 	// .catch((error) => console.error("Error", error));
 };
 
-export const dislike = (id, oldLike) => {
+export const dislike = (id, likes, oldLike) => {
 	updateDoc(doc(db, "documents", id), {
-		likes: arrayRemove(oldLike),
+		numberLikes: likes,
+		arrayLikes: arrayRemove(oldLike),
 	});
 };
 

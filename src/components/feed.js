@@ -30,7 +30,7 @@ export const feed = () => {
 	//Creamos elementos del Feed
 	const feedDiv = document.createElement("div");
 	feedDiv.classList = "feedDiv";
-	const header = document.createElement("div");
+	const headerContainer = document.createElement("div");
 
 	const imgHeader = document.createElement("img");
 	imgHeader.src = "../img/Logo VeganShip.png";
@@ -42,33 +42,32 @@ export const feed = () => {
 	const buttonSignOut = document.createElement("button");
 	buttonSignOut.textContent = "Cerrar Sesión";
 
-	const newPostContainer = document.createElement("form");
-	newPostContainer.classList = "newPostContainer";
-	const newPostLocation = document.createElement("input");
-	newPostLocation.placeholder = "ubicación";
+	const formNewPostContainer = document.createElement("form");
+	formNewPostContainer.classList = "newPostContainer";
+	const inputNewPostLocation = document.createElement("input");
+	inputNewPostLocation.placeholder = "ubicación";
 
-	const newPostTag = document.createElement("input");
-	newPostTag.placeholder = "etiquetas";
+	const inputNewPostTag = document.createElement("input");
+	inputNewPostTag.placeholder = "etiquetas";
 
-	const newPostInput = document.createElement("textarea");
-	newPostInput.classList = "newPostContent";
-	const newPostButton = document.createElement("button");
-	newPostButton.textContent = "publicar";
-	const postFeed = document.createElement("section");
-	postFeed.className = "post-feed";
+	const textAreaNewPost = document.createElement("textarea");
+	textAreaNewPost.classList = "textAreaNewPost";
+	const buttonNewPost = document.createElement("button");
+	buttonNewPost.textContent = "publicar";
+	const allPostsContainer = document.createElement("section");
+	allPostsContainer.className = "post-feed";
 
-	feedDiv.appendChild(header);
-	header.appendChild(imgHeader);
-	header.appendChild(inputSearchHeader);
-	header.appendChild(buttonSignOut);
-	feedDiv.appendChild(newPostContainer);
-	newPostContainer.appendChild(newPostLocation);
-	newPostContainer.appendChild(newPostTag);
-	newPostContainer.appendChild(newPostInput);
-	newPostContainer.appendChild(newPostButton);
-	feedDiv.appendChild(postFeed);
+	feedDiv.appendChild(headerContainer);
+	headerContainer.appendChild(imgHeader);
+	headerContainer.appendChild(inputSearchHeader);
+	headerContainer.appendChild(buttonSignOut);
+	feedDiv.appendChild(formNewPostContainer);
+	formNewPostContainer.appendChild(inputNewPostLocation);
+	formNewPostContainer.appendChild(inputNewPostTag);
+	formNewPostContainer.appendChild(textAreaNewPost);
+	formNewPostContainer.appendChild(buttonNewPost);
+	feedDiv.appendChild(allPostsContainer);
 
-	let editPostStatus = false;
 	let id = "";
 
 	window.addEventListener("DOMContentLoaded", async () => {
@@ -77,26 +76,18 @@ export const feed = () => {
 			orderBy("createdAt", "desc")
 			//authCredentials(currentUser)
 		);
-
-		newPostContainer.addEventListener("submit", (e) => {
-			e.preventDefault();
-			const postContent = newPostInput.value;
-			addPost(postContent);
-			console.log(postContent);
-			//console.log(contenidoPost)
-			newPostContainer.reset();
-		});
+		listenPublishButton();
 
 		onSnapshot(queryRef, (querySnapshot) => {
 			//console.log(currentUser.uid);
-			postFeed.innerHTML = "";
+			allPostsContainer.innerHTML = "";
 			querySnapshot.forEach((item) => {
 				const postDiv = document.createElement("div");
 
 				postDiv.className = "postDiv";
 				const printedPost = postPrint(item);
 				postDiv.innerHTML = printedPost;
-				postFeed.appendChild(postDiv);
+				allPostsContainer.appendChild(postDiv);
 				if (auth.currentUser.uid == item.data().uid) {
 					const idPost = "idButtonsPosts" + item.id;
 					const buttonsOwnPosts = document.getElementById(idPost);
@@ -104,84 +95,39 @@ export const feed = () => {
 				}
 
 				listenEditButton(item);
-				listenSaveButton(item);
+				listenSaveEditionButton(item);
+				listenDeleteButton(item);
+				//listenLikeButton(item);
 			});
 
-			const btnDelete = postFeed.querySelectorAll(".buttonDelete");
-			btnDelete.forEach((btn) => {
-				btn.addEventListener("click", async ({ target: { dataset } }) => {
-					try {
-						await deletePost(dataset.id);
-					} catch (error) {
-						console.log(error);
-					}
-				});
-			});
+			// const btnLike = allPostsContainer.querySelectorAll(".buttonLike");
+			// btnLike.forEach((btn) => {
+			// 	btn.addEventListener("click", async (e) => {
+			// 		try {
+			// 			const id = e.target.dataset.id;
+			// 			const dataPost = await getPost(id);
+			// 			const post = dataPost.data();
+			// 			console.log(id, userSignedId);
 
-			/*const btnEdit = postFeed.querySelectorAll(".buttonEdit");
-			btnEdit.forEach((btn) => {
-				btn.addEventListener("click", async (e) => {
-					const doc = await getPost(e.target.dataset.id);
-					const postData = doc.data();
-					console.log(postData);
-					const postArea = document.getElementById("postContainer");
-					const editPostTextArea = document.getElementById("editTextArea");
-					const formEditingArea = document.getElementById("formEditTextArea");
-					const saveButton = document.getElementById("buttonSaveEdit");
+			// 			const userWhoCurrentLike = post.likes.indexOf(userSignedId);
+			// 			console.log("post: ", post, "post.likes: ", post.likes);
+			// 			//console.log(userWhoCurrentLike)
+			// 			//console.log("dbLikes.lenght", dbLikes.length, "dbLikes"+dbLikes, "userWhoCurrentLike", userWhoCurrentLike)
 
-					postArea.style.display = "none"; // to hide
-					formEditingArea.style.display = "block"; // to show
-
-					editPostTextArea.value = postData.post;
-					editPostStatus = true;
-					id = e.target.dataset.id;
-
-					saveButton.addEventListener("click", (e) => {
-						e.preventDefault();
-						const postContent = editPostTextArea.value;
-						// console.log(postContent);
-						if (!editPostStatus) {
-							addPost(postContent);
-							// console.log(postContent);
-						} else {
-							editPost(id, { post: postContent });
-							editPostStatus = false;
-						}
-						//console.log(contenidoPost)
-						postArea.style.display = "block";
-						formEditingArea.style.display = "none";
-					});
-				});
-			});*/
-
-			const btnLike = postFeed.querySelectorAll(".buttonLike");
-			btnLike.forEach((btn) => {
-				btn.addEventListener("click", async (e) => {
-					try {
-						const id = e.target.dataset.id;
-						const dataPost = await getPost(id);
-						const post = dataPost.data();
-						console.log(id, userSignedId);
-
-						const currentLike = post.likes.indexOf(userSignedId);
-						console.log("post: ", post, "post.likes: ", post.likes);
-						//console.log(currentLike)
-						//console.log("dbLikes.lenght", dbLikes.length, "dbLikes"+dbLikes, "currentLike", currentLike)
-
-						if (currentLike === -1) {
-							//console.log("like funct")
-							giveLike(id, userSignedId);
-							console.log("boton like", currentLike + " currentLike");
-						} else {
-							console.log("dislike funct");
-							dislike(id, userSignedId);
-							console.log("boton dislike", currentLike + "currentLike");
-						}
-					} catch (error) {
-						console.log("catch del error", error);
-					}
-				});
-			});
+			// 			if (userWhoCurrentLike === -1) {
+			// 				//console.log("like funct")
+			// 				giveLike(id, userSignedId);
+			// 				console.log("boton like", userWhoCurrentLike + " userWhoCurrentLike");
+			// 			} else {
+			// 				console.log("dislike funct");
+			// 				dislike(id, userSignedId);
+			// 				console.log("boton dislike", userWhoCurrentLike + "userWhoCurrentLike");
+			// 			}
+			// 		} catch (error) {
+			// 			console.log("catch del error", error);
+			// 		}
+			// 	});
+			// });
 		});
 	});
 
@@ -199,6 +145,25 @@ export const feed = () => {
 	return feedDiv;
 };
 
+const listenPublishButton = () => {
+	const formNewPostContainer = document.querySelector(".newPostContainer");
+	const newPostTextArea = document.querySelector(".textAreaNewPost");
+	formNewPostContainer.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		const newPostContent = newPostTextArea.value;
+		await addPost(newPostContent);
+		//console.log(newPostContent);
+		formNewPostContainer.reset();
+	});
+};
+
+const listenDeleteButton = (post) => {
+	const deleteButton = document.getElementById("buttonDelete-" + post.id);
+	deleteButton.addEventListener("click", async () => {
+		await deletePost(post.id);
+	});
+};
+
 const listenEditButton = (post) => {
 	const editButton = document.getElementById("buttonEdit-" + post.id);
 	const postArea = document.getElementById("postContainer-" + post.id);
@@ -213,18 +178,75 @@ const listenEditButton = (post) => {
 	});
 };
 
-const listenSaveButton = (post) => {
+const listenSaveEditionButton = (post) => {
 	const saveButton = document.getElementById("buttonSaveEdit-" + post.id);
 	const postArea = document.getElementById("postContainer-" + post.id);
 	const formEditingArea = document.getElementById("formEditTextArea-" + post.id);
 	const editPostTextArea = document.getElementById("editTextArea-" + post.id);
 
-	saveButton.addEventListener("click", (e) => {
+	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
-		const postContent = editPostTextArea.value;
-		editPost(post.id, { post: postContent });
+		const newPostContent = editPostTextArea.value;
+		await editPost(post.id, { post: newPostContent });
 
 		postArea.style.display = "block";
 		formEditingArea.style.display = "none";
 	});
 };
+
+// const listenLikeButton = (post) => {
+// 	const likeButton = document.querySelectorAll(".buttonLike");
+// 	//console.log(likeButton);
+// 	likeButton.forEach((btn) => {
+// 		btn.addEventListener("click", async (e) => {
+// 			//const userWhoCurrentLike = post.data().uid; //id del usuario a quien le pertenece el post.
+// 			const currentPostLiked = post.id; //id del post que fue likeado (id)
+// 			const currentUser = auth.currentUser.uid; //id del usuario en linea
+// 			//const dataPost = await getPost(currentPostLiked);
+// 			//const posting = dataPost.data();
+// 			// console.log(userWhoCurrentLike);
+// 			// console.log(currentPostLiked);
+// 			console.log(currentUser);
+// 			// console.log(dataPost, posting);
+// 			//const id = e.target.dataset.id;
+// 			//const dataPost = await getPost(id);
+
+// 			// 	console.log(id, userSignedId);
+
+// 			//const queSoy = post.data().likes.indexOf(currentUser);
+// 			//console.log(queSoy);
+// 			// 	console.log("post: ", post, "post.likes: ", post.likes);
+// 			// 	//console.log(userWhoCurrentLike)
+// 			// 	//console.log("dbLikes.lenght", dbLikes.length, "dbLikes"+dbLikes, "userWhoCurrentLike", userWhoCurrentLike)
+
+// 			// 	if (userWhoCurrentLike === -1) {
+// 			// 		//console.log("like funct")
+// 			// 		giveLike(id, userSignedId);
+// 			// 		console.log("boton like", userWhoCurrentLike + " userWhoCurrentLike");
+// 			// 	} else {
+// 			// 		console.log("dislike funct");
+// 			// 		dislike(id, userSignedId);
+// 			// 		console.log("boton dislike", userWhoCurrentLike + "userWhoCurrentLike");
+// 			// 	}
+// 			// } catch (error) {
+// 			// 	console.log("catch del error", error);
+// 			// }
+// 			if (currentPostLiked && currentUser) {
+// 				//console.log("like funct")
+// 				getPost(currentPostLiked)
+// 				.then(item) => {
+// 					const postData = item.data();
+// 					if(!postData.arra){
+
+// 					}
+// 				}
+// 				giveLike(currentPostLiked, userWhoCurrentLike);
+// 				console.log("boton like", userWhoCurrentLike + " userWhoCurrentLike");
+// 			} else {
+// 				console.log("dislike funct");
+// 				await dislike(id, post.uid);
+// 				console.log("boton dislike", userWhoCurrentLike + "userWhoCurrentLike");
+// 			}
+// 		});
+// 	});
+// };
