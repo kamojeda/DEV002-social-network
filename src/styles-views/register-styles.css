@@ -54,7 +54,6 @@
 }
 
 .container-register {
-    margin: 40px;
     grid-row-start: 1;
     grid-row-end: 2;
     display: flex;
@@ -68,112 +67,131 @@
 .register-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    margin: 20px;
+    align-items: baseline;
+    margin: 15px 15px 15px 15px;
 
 
 }
 
 .input-Name-User {
     width: 285px;
-    height: 30px;
+    height: 35px;
     border-color: var(--main-color);
-    border-radius: 15px;
+    border-radius: 18px;
     margin-top: 0px;
     padding: 7px;
     text-align: left;
-    font-style: italic;
-    font-size: 14px;
+}
+
+.input-Name-User::placeholder{
+    color: rgba(31, 30, 28, 0.5);
+  font-style: italic;
+  font-size: 15px;
 }
 
 .input-City-User {
     width: 285px;
-    height: 30px;
+    height: 35px;
     border-color: var(--main-color);
-    border-radius: 15px;
+    border-radius: 18px;
     margin-top: 0px;
     padding: 7px;
     text-align: left;
-    font-style: italic;
-    font-size: 14px;
+}
+
+.input-City-User::placeholder{
+    color: rgba(31, 30, 28, 0.5);
+  font-style: italic;
+  font-size: 15px;
 }
 
 .input-Mail-User {
     width: 285px;
-    height: 30px;
+    height: 35px;
     border-color: var(--main-color);
-    border-radius: 15px;
+    border-radius: 18px;
     margin-top: 0px;
     padding: 7px;
     text-align: left;
-    font-style: italic;
-    font-size: 14px;
+}
+
+.input-Mail-User::placeholder{
+    color: rgba(31, 30, 28, 0.5);
+  font-style: italic;
+  font-size: 15px;
 }
 
 .input-Pass-User {
     width: 285px;
-    height: 30px;
+    height: 35px;
     border-color: var(--main-color);
-    border-radius: 15px;
+    border-radius: 18px;
     margin-top: 0px;
     padding: 7px;
     text-align: left;
-    font-style: italic;
-    font-size: 14px;
+}
+
+.input-Pass-User::placeholder{
+    color: rgba(31, 30, 28, 0.5);
+  font-style: italic;
+  font-size: 15px;
 }
 
 .input-Check-Pass {
     width: 285px;
-    height: 30px;
+    height: 35px;
     border-color: var(--main-color);
-    border-radius: 15px;
+    border-radius: 18px;
     margin-top: 0px;
     padding: 7px;
     text-align: left;
-    font-style: italic;
-    font-size: 14px;
+}
+
+.input-Check-Pass::placeholder{
+    color: rgba(31, 30, 28, 0.5);
+  font-style: italic;
+  font-size: 15px;
 }
 
 .userName {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
-    margin-top: 13px;
-
+    
 }
 
 .userCity {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     margin-top: 13px;
 }
 
 .userMail {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     margin-top: 13px;
 }
 
 .userPassword {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     margin-top: 13px;
 }
 
 .userCheckPass {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     margin-top: 13px;
 }
 
 .label-user-select {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     margin-top: 13px;
 }
 
 #selectVegan {
-    width: 270px;
+    display: flex;
+    width: 285px;
     height: 35px;
     font-size: 15px;
     font-family: var(--secundary-font-family);
@@ -190,7 +208,7 @@ option {
 }
 
 .button-Register {
-    width: 270px;
+    width: 285px;
     height: 40px;
     border-radius: 30px;
     color: var(--neutral-font);
@@ -200,3 +218,10 @@ option {
     margin: 30px;
     background-color: var(--main-color);
 }
+
+.button-Register:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+
+/* Media Queries */
