@@ -6,13 +6,13 @@ import { feed } from "../components/feed.js"; */
 export const postPrint = (doc) => {
 	let docs = doc.data();
 	let postValue = `
-    <div class = "postContent" id = "idPostContent">
-    <div id = "userNamePost" class="userNamePost">  ${docs.uid} usuario ${docs.user} </div>
-    <div id = "postContainer-${doc.id}" class= "postContainer"> contenido del post ${docs.post} </div>
+    <div class = "postContent" id = "idPostContent">    
+    <div id = "userNamePost" class="userNamePost">${docs.user} </div>
+    <div id = "postContainer-${doc.id}" class= "postContainer">${docs.post} </div>
     </div>
 
     <form id = "formEditTextArea-${doc.id}" class= "formEditTextArea" style= "display:none"> 
-    <textArea id = "editTextArea-${doc.id}" class= "editTextArea" > contenido del post ${doc.post} </textArea>
+    <textArea id = "editTextArea-${doc.id}" class= "editTextArea" >${doc.post} </textArea>
     <button id = "buttonSaveEdit-${doc.id}" class = "buttonSaveEdit" data-id="${doc.id}">Guardar</button>
     </form>
     
@@ -23,7 +23,7 @@ export const postPrint = (doc) => {
 
     <div class = "buttonsLikePosts">
     <button class = "buttonLike" id = "buttonLike" data-id="${doc.id}">like</button>
-    <span class = "likeCounter">
+    <span class = "likeCounter">${docs.likes.length}</span>
     </div>
     `; //console.log(doc.id)
 	return postValue;

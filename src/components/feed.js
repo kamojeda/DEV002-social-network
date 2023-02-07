@@ -19,7 +19,8 @@ export const feed = () => {
 	//Creamos elementos del Feed
 	const feedDiv = document.createElement("div");
 	feedDiv.classList = "feedDiv";
-	const headerContainer = document.createElement("div");
+	const headerFeed = document.createElement("header");
+	headerFeed.className = 'headerFeed'
 
 	const imgHeader = document.createElement("img");
 	imgHeader.src = "../img/Logo VeganShip.png";
@@ -31,13 +32,15 @@ export const feed = () => {
 	const buttonSignOut = document.createElement("button");
 	buttonSignOut.textContent = "Cerrar Sesión";
 
+	const newPostContainer = document.createElement('div');
+	newPostContainer.className = 'newPostContainer'
 	const formNewPostContainer = document.createElement("form");
-	formNewPostContainer.classList = "newPostContainer";
+	formNewPostContainer.classList = "formNewPostContainer";
 	const inputNewPostLocation = document.createElement("input");
 	inputNewPostLocation.placeholder = "ubicación";
 
-	const inputNewPostTag = document.createElement("input");
-	inputNewPostTag.placeholder = "etiquetas";
+	//const inputNewPostTag = document.createElement("input");
+	//inputNewPostTag.placeholder = "etiquetas";
 
 	const textAreaNewPost = document.createElement("textarea");
 	textAreaNewPost.classList = "textAreaNewPost";
@@ -46,13 +49,14 @@ export const feed = () => {
 	const allPostsContainer = document.createElement("section");
 	allPostsContainer.className = "post-feed";
 
-	feedDiv.appendChild(headerContainer);
-	headerContainer.appendChild(imgHeader);
-	headerContainer.appendChild(inputSearchHeader);
-	headerContainer.appendChild(buttonSignOut);
-	feedDiv.appendChild(formNewPostContainer);
+	feedDiv.appendChild(headerFeed);
+	headerFeed.appendChild(imgHeader);
+	headerFeed.appendChild(inputSearchHeader);
+	headerFeed.appendChild(buttonSignOut);
+	feedDiv.appendChild(newPostContainer);
+	newPostContainer.appendChild(formNewPostContainer)
 	formNewPostContainer.appendChild(inputNewPostLocation);
-	formNewPostContainer.appendChild(inputNewPostTag);
+	//formNewPostContainer.appendChild(inputNewPostTag);
 	formNewPostContainer.appendChild(textAreaNewPost);
 	formNewPostContainer.appendChild(buttonNewPost);
 	feedDiv.appendChild(allPostsContainer);
@@ -134,7 +138,7 @@ export const feed = () => {
 };
 
 const listenPublishButton = () => {
-	const formNewPostContainer = document.querySelector(".newPostContainer");
+	const formNewPostContainer = document.querySelector(".formNewPostContainer");
 	const newPostTextArea = document.querySelector(".textAreaNewPost");
 	formNewPostContainer.addEventListener("submit", async (e) => {
 		e.preventDefault();
