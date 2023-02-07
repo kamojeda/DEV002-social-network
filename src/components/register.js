@@ -1,5 +1,6 @@
 import { toNavigate } from "../main.js";
-import { auth, signUpWithPass, viewer } from "../Firebase/firebase.js";
+import { auth } from "../Firebase/firebase.js";
+import { signUpWithPass } from "../Firebase/auth-func.js";
 //import { getFirestore } from "../src/firebase/firestore.js";
 
 export const register = () => {
@@ -80,35 +81,35 @@ export const register = () => {
 	containerRegisterForm.className = "container-register-form";
 	registerForm.className = "register-form";
 
-	labelUserName.className = "userName";
+	labelUserName.className = "userName labels-r";
 	labelUserName.textContent = "Nombre de Usuario";
 	inputUserName.className = "input-Name-User";
 	inputUserName.placeholder = "Juanita";
 
-	labelUserCity.className = "userCity";
+	labelUserCity.className = "userCity labels-r";
 	labelUserCity.textContent = "Ciudad, País";
 	inputUserCity.className = "input-City-User";
 	inputUserCity.placeholder = "Lima, Perú";
 
-	labelUserMail.className = "userMail";
+	labelUserMail.className = "userMail labels-r";
 	labelUserMail.textContent = "Correo electrónico";
 	inputUserMail.type = "email";
 	inputUserMail.className = "input-Mail-User";
 	inputUserMail.placeholder = "example@gmail.com";
 
-	labelUserPass.className = "userPassword";
+	labelUserPass.className = "userPassword labels-r";
 	labelUserPass.textContent = "Contraseña";
 	inputUserPass.type = "password";
 	inputUserPass.className = "input-Pass-User";
 	inputUserPass.placeholder = "xxxxxxxxxx";
 
-	labelUserCheckPass.className = "userCheckPass";
+	labelUserCheckPass.className = "userCheckPass labels-r";
 	labelUserCheckPass.textContent = "Verificar contraseña";
 	inputUserCheckPass.type = "password";
 	inputUserCheckPass.className = "input-Check-Pass";
 	inputUserCheckPass.placeholder = "xxxxxxxxxx";
 
-	labelSelectVegan.className = "label-user-select";
+	labelSelectVegan.className = "label-user-select labels-r";
 	labelSelectVegan.textContent = "¿Eres vegano?";
 
 	buttonRegister.className = "button-Register";
