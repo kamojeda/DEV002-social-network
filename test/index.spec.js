@@ -25,30 +25,85 @@ jest.mock("../src/Firebase/firebase.js", () => {
 		}),
 		createUserWithEmailAndPassword: jest.fn((email, password) => {
 			if (!email || !password) {
-				throw new Error("Correo o Contraseña vacíos");
+				throw new Error("Campo de correo o contraseña vacíos");
 			}
-			return Promise.resolve({ user: "admin" });
+			if (email === "vacavegana@gmail.c") {
+				throw new Error("Correo ingresado inválido");
+			}
+			if (email === "veganship@gmailcom") {
+				return "Correo ingresado válido";
+			}
+			return Promise.resolve();
+		}),
+		signInWithEmailAndPassword: jest.fn((email, password) => {
+			if (!email || !password) {
+				throw new Error("Campo de correo o contraseña vacíos");
+			}
+			if (email === "vacavegana@gmail.c") {
+				throw new Error("Correo ingresado inválido");
+			}
+			if (email === "veganship@gmailcom") {
+				return "Correo ingresado válido";
+			}
+			return Promise.resolve();
 		}),
 	};
 });
 
-describe("Test de Inicio de sesión", () => {
-	const email = "veganship@gmail";
+describe("Test de Crear cuenta con correo y contrseña", () => {
+	const email = "veganship@gmailcom";
 	const password = "prueba123456";
 
-	it("debe retornar error de usuario no encontrado", async () => {
+	it("Debe retornar un error de campo de correo vacío", async () => {
 		try {
-			await signInWithPass(email, password);
+			await signUpWithPass(" ", password);
 		} catch (error) {
-			expect(error.code).toBe("usuario NO encontrado");
+			expect(error.code).toBe("Campo de correo o contraseña vacíos");
 		}
 	});
 
-	it("debe retornar un error de contraseña incorrecta", async () => {
+	it("Debe retornar un error de correo inválido", async () => {
+		try {
+			await signUpWithPass("vacavegana@gmail.c", password);
+		} catch (error) {
+			expect(error.code).toBe("Correo ingresado inválido");
+		}
+	});
+
+	it("Debe retornar que el correo ingresado es válido", async () => {
+		try {
+			await signUpWithPass(email, password);
+		} catch (error) {
+			expect(error.code).toBe("Correo ingresado válido");
+		}
+	});
+});
+
+describe("Test de Inicio de sesión con correo y contraseña", () => {
+	const email = "veganship@gmailcom";
+	const password = "prueba123456";
+
+	it("Debe retornar un error de campo de correo vacío", async () => {
+		try {
+			await signInWithPass(" ", password);
+		} catch (error) {
+			expect(error.code).toBe("Campo de correo o contraseña vacíos");
+		}
+	});
+
+	it("Debe retornar un error de correo inválido", async () => {
+		try {
+			await signInWithPass("vacavegana@gmail.com", password);
+		} catch (error) {
+			expect(error.code).toBe("Correo ingresado inválido");
+		}
+	});
+
+	it("Debe retornar que el correo ingresado es válido", async () => {
 		try {
 			await signInWithPass(email, password);
 		} catch (error) {
-			expect(error.code).toBe("contraseña incorrecta");
+			expect(error.code).toBe("Correo ingresado válido");
 		}
 	});
 });

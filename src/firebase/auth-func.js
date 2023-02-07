@@ -1,6 +1,7 @@
 import {
 	auth,
 	createUserWithEmailAndPassword,
+	onAuthStateChanged,
 	provider,
 	signOut,
 	signInWithPopup,
