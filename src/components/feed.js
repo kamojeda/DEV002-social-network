@@ -1,6 +1,6 @@
 import { toNavigate } from "../main.js";
-import { auth, db } from "../Firebase/firebase.js";
-import { logout, userSignedIn } from "../Firebase/auth-func.js";
+import { db } from "../Firebase/firebase.js";
+import { auth, logout, userSignedIn } from "../Firebase/auth-func.js";
 import {
 	addPost,
 	collection,
@@ -62,7 +62,7 @@ export const feed = () => {
 	feedDiv.appendChild(allPostsContainer);
 
 	window.addEventListener("DOMContentLoaded", async () => {
-		const userSignedId = userSignedIn().uid;
+		console.log(userSignedIn())
 		const queryRef = query(
 			collection(db, "documents"),
 			orderBy("createdAt", "desc")
@@ -77,13 +77,13 @@ export const feed = () => {
 				const postDiv = document.createElement("div");
 				
 
-				console.log(item.data().uid, userSignedId)
+				console.log(item.data().uid)
 
 				postDiv.className = "postDiv";
 				const printedPost = postPrint(item);
 				postDiv.innerHTML = printedPost;
 				allPostsContainer.appendChild(postDiv);
-				if (userSignedId == item.data().uid) {
+				if (auth.currentUser.uid == item.data().uid) {
 					const idPost = "idButtonsPosts" + item.id;
 					const buttonsOwnPosts = document.getElementById(idPost);
 					buttonsOwnPosts.style.display = "block";
@@ -95,7 +95,7 @@ export const feed = () => {
 				//listenLikeButton(item);
 			});
 
-			console.log(userSignedId);
+			
 			const btnLike = allPostsContainer.querySelectorAll(".buttonLike");
 			btnLike.forEach((btn) => {
 				btn.addEventListener("click", async (e) => {
