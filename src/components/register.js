@@ -137,7 +137,7 @@ export const register = () => {
 	registerForm.appendChild(buttonRegister);
 
 	buttonRegister.addEventListener("click", () => {
-		registerForm.addEventListener("click", async (e) => {
+		registerForm.addEventListener("submit", async (e) => {
 			e.preventDefault(); //cancela comportamiento por defecto de refrescar la pagina
 			try {
 				const emailForm = inputUserMail.value;
