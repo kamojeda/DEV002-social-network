@@ -1,28 +1,18 @@
 import { toNavigate } from "../main.js";
-import { register } from "../components/register.js";
+import { auth, db } from "../Firebase/firebase.js";
+import { logout, userSignedIn } from "../Firebase/auth-func.js";
 import {
-	auth,
-	logout,
-	userSignedIn,
-	viewer,
-	getDisplayName,
-} from "../Firebase/firebase.js";
-import {
-	getFirestore,
 	addPost,
 	collection,
-	db,
 	onSnapshot,
 	deletePost,
-	onGetPosts,
 	editPost,
 	query,
 	orderBy,
 	giveLike,
 	dislike,
 	getPost,
-	doc,
-} from "../Firebase/firestore.js";
+} from "../firebase/firestore-funct.js";
 import { postPrint } from "../components/post.js";
 
 export const feed = () => {
@@ -30,7 +20,7 @@ export const feed = () => {
 	const feedDiv = document.createElement("div");
 	feedDiv.classList = "feedDiv";
 	const headerFeed = document.createElement("header");
-	headerFeed.className = 'headerFeed'
+	headerFeed.className = "headerFeed";
 
 	const imgHeader = document.createElement("img");
 	imgHeader.src = "../img/Logo VeganShip.png";
@@ -42,8 +32,8 @@ export const feed = () => {
 	const buttonSignOut = document.createElement("button");
 	buttonSignOut.textContent = "Cerrar Sesión";
 
-	const newPostContainer = document.createElement('div');
-	newPostContainer.className = 'newPostContainer'
+	const newPostContainer = document.createElement("div");
+	newPostContainer.className = "newPostContainer";
 	const formNewPostContainer = document.createElement("form");
 	formNewPostContainer.classList = "formNewPostContainer";
 	const inputNewPostLocation = document.createElement("input");
@@ -64,7 +54,7 @@ export const feed = () => {
 	headerFeed.appendChild(inputSearchHeader);
 	headerFeed.appendChild(buttonSignOut);
 	feedDiv.appendChild(newPostContainer);
-	newPostContainer.appendChild(formNewPostContainer)
+	newPostContainer.appendChild(formNewPostContainer);
 	formNewPostContainer.appendChild(inputNewPostLocation);
 	//formNewPostContainer.appendChild(inputNewPostTag);
 	formNewPostContainer.appendChild(textAreaNewPost);
