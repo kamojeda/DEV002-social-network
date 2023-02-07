@@ -142,9 +142,13 @@ const listenPublishButton = () => {
 	formNewPostContainer.addEventListener("submit", async (e) => {
 		e.preventDefault();
 		const newPostContent = newPostTextArea.value;
+		if(newPostContent.length > 0){
 		await addPost(newPostContent);
 		//console.log(newPostContent);
 		formNewPostContainer.reset();
+		} else {
+			alert("no puedes publicar un post vacío")
+		}
 	});
 };
 
