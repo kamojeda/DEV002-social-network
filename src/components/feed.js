@@ -62,6 +62,7 @@ export const feed = () => {
 	feedDiv.appendChild(allPostsContainer);
 
 	window.addEventListener("DOMContentLoaded", async () => {
+		const userSignedId = userSignedIn().uid;
 		const queryRef = query(
 			collection(db, "documents"),
 			orderBy("createdAt", "desc")
@@ -74,12 +75,15 @@ export const feed = () => {
 			allPostsContainer.innerHTML = "";
 			querySnapshot.forEach((item) => {
 				const postDiv = document.createElement("div");
+				
+
+				console.log(item.data().uid, userSignedId)
 
 				postDiv.className = "postDiv";
 				const printedPost = postPrint(item);
 				postDiv.innerHTML = printedPost;
 				allPostsContainer.appendChild(postDiv);
-				if (auth.currentUser.uid == item.data().uid) {
+				if (userSignedId == item.data().uid) {
 					const idPost = "idButtonsPosts" + item.id;
 					const buttonsOwnPosts = document.getElementById(idPost);
 					buttonsOwnPosts.style.display = "block";
@@ -90,7 +94,7 @@ export const feed = () => {
 				listenDeleteButton(item);
 				//listenLikeButton(item);
 			});
-			const userSignedId = userSignedIn().uid;
+
 			console.log(userSignedId);
 			const btnLike = allPostsContainer.querySelectorAll(".buttonLike");
 			btnLike.forEach((btn) => {

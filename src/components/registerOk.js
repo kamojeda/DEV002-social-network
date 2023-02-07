@@ -2,7 +2,7 @@ import { toNavigate } from "../main.js";
 import { auth } from "../Firebase/firebase.js";
 
 export const registerOk = () => {
-	const user = auth.currentUser;
+	const user = auth.currentUser;	
 	const displayName = user.displayName;
 	const registerOkDiv = document.createElement("div");
 	const containerOk = document.createElement("section");

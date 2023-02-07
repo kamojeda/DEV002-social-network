@@ -137,21 +137,20 @@ export const register = () => {
 	registerForm.appendChild(buttonRegister);
 
 	buttonRegister.addEventListener("click", () => {
-		registerForm.addEventListener("click", async (e) => {
+		registerForm.addEventListener("submit", async (e) => {
 			e.preventDefault(); //cancela comportamiento por defecto de refrescar la pagina
 			try {
 				const emailForm = inputUserMail.value;
 				const passwordForm = inputUserPass.value;
 				const nameForm = inputUserName.value;
 				const cityForm = inputUserCity.value;
-
 				const userCredentials = await signUpWithPass(
 					auth,
 					emailForm,
 					passwordForm,
 					nameForm
 				);
-				console.log(userCredentials);
+				console.log("llega hasta acá", userCredentials);
 			} catch (error) {
 				if (error.code === "auth/invalid-email") {
 					alert("email inválido");
