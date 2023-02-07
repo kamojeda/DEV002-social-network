@@ -53,24 +53,24 @@
     transform: rotate(45deg);
 }
 
-.container-register {
-    grid-row-start: 1;
-    grid-row-end: 2;
+.container-register-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 90px;
+}
 
+.container-register {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin-top: 90px;
 }
 
 .register-form {
     display: flex;
     flex-direction: column;
-    align-items: baseline;
+    align-items: left;
     margin: 15px 15px 15px 15px;
-
-
 }
 
 .input-Name-User {
@@ -83,10 +83,10 @@
     text-align: left;
 }
 
-.input-Name-User::placeholder{
+.input-Name-User::placeholder {
     color: rgba(31, 30, 28, 0.5);
-  font-style: italic;
-  font-size: 15px;
+    font-style: italic;
+    font-size: 15px;
 }
 
 .input-City-User {
@@ -99,10 +99,10 @@
     text-align: left;
 }
 
-.input-City-User::placeholder{
+.input-City-User::placeholder {
     color: rgba(31, 30, 28, 0.5);
-  font-style: italic;
-  font-size: 15px;
+    font-style: italic;
+    font-size: 15px;
 }
 
 .input-Mail-User {
@@ -115,10 +115,10 @@
     text-align: left;
 }
 
-.input-Mail-User::placeholder{
+.input-Mail-User::placeholder {
     color: rgba(31, 30, 28, 0.5);
-  font-style: italic;
-  font-size: 15px;
+    font-style: italic;
+    font-size: 15px;
 }
 
 .input-Pass-User {
@@ -131,10 +131,10 @@
     text-align: left;
 }
 
-.input-Pass-User::placeholder{
+.input-Pass-User::placeholder {
     color: rgba(31, 30, 28, 0.5);
-  font-style: italic;
-  font-size: 15px;
+    font-style: italic;
+    font-size: 15px;
 }
 
 .input-Check-Pass {
@@ -147,16 +147,16 @@
     text-align: left;
 }
 
-.input-Check-Pass::placeholder{
+.input-Check-Pass::placeholder {
     color: rgba(31, 30, 28, 0.5);
-  font-style: italic;
-  font-size: 15px;
+    font-style: italic;
+    font-size: 15px;
 }
 
 .userName {
     font-size: 15px;
     font-weight: bold;
-    
+
 }
 
 .userCity {
@@ -208,6 +208,7 @@ option {
 }
 
 .button-Register {
+
     width: 285px;
     height: 40px;
     border-radius: 30px;
@@ -215,13 +216,13 @@ option {
     font-size: 18px;
     font-weight: bold;
     border-style: none;
-    margin: 30px;
+    margin-top: 30px;
     background-color: var(--main-color);
 }
 
 .button-Register:hover {
     cursor: pointer;
     transform: scale(1.05);
-  }
+}
 
 /* Media Queries */
