@@ -1,5 +1,6 @@
 // importamos la funcion que vamos a testear
 import {
+	auth,
 	createUserWithEmailAndPassword,
 	updateProfile,
 	provider,
@@ -8,7 +9,6 @@ import {
 	signInWithEmailAndPassword,
 } from "../src/Firebase/firebase.js";
 import {
-	auth,
 	signInWithPass,
 	getDisplayName,
 	signUpWithPass,
@@ -20,13 +20,13 @@ import {
 jest.mock("../src/Firebase/firebase.js", () => {
 	return {
 		auth: jest.fn(() => {
-			return { auth: "test" };
+			return { auth: "auth" };
 		}),
-		createUserWithEmailAndPassword: jest.fn((email, password) => {
+		createUserWithEmailAndPassword: jest.fn((auth, email, password) => {
 			if (!email || !password) {
 				throw new Error("Campo de correo o contraseña vacíos");
 			}
-			if (email === "vacavegana@gmail.c") {
+			if (email === "vacaveg@gmail.com") {
 				throw new Error("Correo ingresado inválido");
 			}
 			if (email === "veganship@gmailcom") {
@@ -34,11 +34,11 @@ jest.mock("../src/Firebase/firebase.js", () => {
 			}
 			return Promise.resolve();
 		}),
-		signInWithEmailAndPassword: jest.fn((email, password) => {
+		signInWithEmailAndPassword: jest.fn((auth, email, password) => {
 			if (!email || !password) {
 				throw new Error("Campo de correo o contraseña vacíos");
 			}
-			if (email === "vacavegana@gmail.c") {
+			if (email === "vacaveg@gmail.com") {
 				throw new Error("Correo ingresado inválido");
 			}
 			if (email === "veganship@gmailcom") {
@@ -66,10 +66,11 @@ jest.mock("../src/Firebase/firebase.js", () => {
 describe("Test de Crear cuenta con correo y contrseña", () => {
 	const email = "veganship@gmailcom";
 	const password = "prueba123456";
+	const displayName = "Vaquita";
 
 	it("Debe retornar un error de campo de correo vacío", async () => {
 		try {
-			await signUpWithPass(" ", password);
+			await signUpWithPass(auth, " ", password);
 		} catch (error) {
 			expect(error.code).toBe("Campo de correo o contraseña vacíos");
 		}
@@ -77,7 +78,7 @@ describe("Test de Crear cuenta con correo y contrseña", () => {
 
 	it("Debe retornar un error de correo inválido", async () => {
 		try {
-			await signUpWithPass("vacavegana@gmail.c", password);
+			await signUpWithPass("vacaveg@gmail.com", "12345", "Vaquita");
 		} catch (error) {
 			expect(error.code).toBe("Correo ingresado inválido");
 		}
@@ -85,7 +86,7 @@ describe("Test de Crear cuenta con correo y contrseña", () => {
 
 	it("Debe retornar que el correo ingresado es válido", async () => {
 		try {
-			await signUpWithPass(email, password);
+			await signUpWithPass(email, password, displayName);
 		} catch (error) {
 			expect(error.code).toBe("Correo ingresado válido");
 		}
@@ -98,7 +99,7 @@ describe("Test de Inicio de sesión con correo y contraseña", () => {
 
 	it("Debe retornar un error de campo de correo vacío", async () => {
 		try {
-			await signInWithPass(" ", password);
+			await signInWithPass(auth, " ", password);
 		} catch (error) {
 			expect(error.code).toBe("Campo de correo o contraseña vacíos");
 		}
@@ -106,7 +107,7 @@ describe("Test de Inicio de sesión con correo y contraseña", () => {
 
 	it("Debe retornar un error de correo inválido", async () => {
 		try {
-			await signInWithPass("vacavegana@gmail.com", password);
+			await signInWithPass(auth, "vacavegana@gmail.com", password);
 		} catch (error) {
 			expect(error.code).toBe("Correo ingresado inválido");
 		}
@@ -114,7 +115,7 @@ describe("Test de Inicio de sesión con correo y contraseña", () => {
 
 	it("Debe retornar que el correo ingresado es válido", async () => {
 		try {
-			await signInWithPass(email, password);
+			await signInWithPass(auth, email, password);
 		} catch (error) {
 			expect(error.code).toBe("Correo ingresado válido");
 		}

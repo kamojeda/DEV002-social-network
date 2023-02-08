@@ -10,11 +10,10 @@ import {
 } from "./firebase.js";
 //Crear Usuario
 
-export const signUpWithPass = async (email, password, displayName) => {
+export const signUpWithPass = async (auth, email, password, displayName) => {
 	return await createUserWithEmailAndPassword(auth, email, password)
 		.then((userCredential) => {
 			// Signed in
-			console.log(userCredential);
 			updateProfile(auth.currentUser, { displayName });
 			return userCredential;
 		})
@@ -51,5 +50,3 @@ export const viewer = () => {
 
 export const logout = (auth) => signOut(auth);
 export const popUpGoogle = (auth, provider) => signInWithPopup(auth, provider);
-
-export { auth };
