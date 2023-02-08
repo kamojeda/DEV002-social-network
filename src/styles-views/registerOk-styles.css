@@ -121,6 +121,6 @@
     height: 40px;
     text-align: center;
     background-color: var(--secondary-red);
-    /* margin-bottom: 70px; */
     font-size: 17px;
+    text-align: center;
 }
