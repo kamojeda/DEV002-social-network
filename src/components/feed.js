@@ -1,6 +1,6 @@
 import { toNavigate } from "../main.js";
-import { auth, db } from "../Firebase/firebase.js";
-import { logout, userSignedIn } from "../Firebase/auth-func.js";
+import { db } from "../Firebase/firebase.js";
+import { auth, logout, userSignedIn } from "../Firebase/auth-func.js";
 import {
 	addPost,
 	collection,
@@ -61,7 +61,7 @@ export const feed = () => {
 	formNewPostContainer.appendChild(buttonNewPost);
 	feedDiv.appendChild(allPostsContainer);
 
-	window.addEventListener("DOMContentLoaded", async () => {
+	window.addEventListener("DOMContentLoaded", async () => {		
 		const queryRef = query(
 			collection(db, "documents"),
 			orderBy("createdAt", "desc")
@@ -73,8 +73,7 @@ export const feed = () => {
 			//console.log(currentUser.uid);
 			allPostsContainer.innerHTML = "";
 			querySnapshot.forEach((item) => {
-				const postDiv = document.createElement("div");
-
+				const postDiv = document.createElement("div");					
 				postDiv.className = "postDiv";
 				const printedPost = postPrint(item);
 				postDiv.innerHTML = printedPost;
@@ -90,12 +89,12 @@ export const feed = () => {
 				listenDeleteButton(item);
 				//listenLikeButton(item);
 			});
-			const userSignedId = userSignedIn().uid;
-			console.log(userSignedId);
+
+			const userSignedId = auth.currentUser.uid
 			const btnLike = allPostsContainer.querySelectorAll(".buttonLike");
 			btnLike.forEach((btn) => {
 				btn.addEventListener("click", async (e) => {
-					try {
+					try {						
 						const id = e.target.dataset.id;
 						const dataPost = await getPost(id);
 						const post = dataPost.data();
@@ -143,9 +142,13 @@ const listenPublishButton = () => {
 	formNewPostContainer.addEventListener("submit", async (e) => {
 		e.preventDefault();
 		const newPostContent = newPostTextArea.value;
+		if(newPostContent.length > 0){
 		await addPost(newPostContent);
 		//console.log(newPostContent);
 		formNewPostContainer.reset();
+		} else {
+			alert("no puedes publicar un post vacío")
+		}
 	});
 };
 
