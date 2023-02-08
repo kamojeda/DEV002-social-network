@@ -13,7 +13,6 @@ import {
 	getDisplayName,
 	signUpWithPass,
 	userSignedIn,
-	viewer,
 	logout,
 	popUpGoogle,
 } from "../src/firebase/auth-func.js";
@@ -46,6 +45,20 @@ jest.mock("../src/Firebase/firebase.js", () => {
 				return "Correo ingresado válido";
 			}
 			return Promise.resolve();
+		}),
+		signOut: jest.fn((auth) => {
+			if (!auth) return Promise.reject("ningún usuario logueado");
+		}),
+		updateProfile: jest.fn((auth, displayName) => {
+			if (!auth === !displayName) {
+				return Promise.resolve();
+			}
+		}),
+		signInWithPopup: jest.fn((auth, provider) => {
+			if (!auth) {
+				throw new Error("ERROR");
+			}
+			Promise.resolve({ user: "Carla" });
 		}),
 	};
 });
@@ -105,5 +118,34 @@ describe("Test de Inicio de sesión con correo y contraseña", () => {
 		} catch (error) {
 			expect(error.code).toBe("Correo ingresado válido");
 		}
+	});
+
+	it("debe llamar a función signOut", async () => {
+		await logout(auth);
+		expect(signOut).toHaveBeenCalled();
+	});
+});
+
+describe("Test para guardar el DisplayName del usuario", () => {
+	it("updateProfile debería ser una función", async () => {
+		try {
+			await updateProfile(getDisplayName);
+		} catch (error) {
+			expect(error).toBe("no displayName or auth");
+		}
+	});
+});
+
+describe("Test de Inicio de sesión con cuenta Google", () => {
+	it("signInWithPopup debería ser una función", () => {
+		expect(typeof signInWithPopup).toBe("function");
+	});
+	it("debería llamar a signInWithPopup", async () => {
+		await signInWithPopup(auth, provider);
+		expect(signInWithPopup).toHaveBeenCalled();
+	});
+	it("debería llamar signInWithPopup con auth y provider", async () => {
+		await signInWithPopup(auth, provider);
+		expect(signInWithPopup).toHaveBeenCalledWith(auth, provider);
 	});
 });

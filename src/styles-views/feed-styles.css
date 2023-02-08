@@ -40,13 +40,24 @@
 .headerFeed {
   grid-column-start: 1;
   grid-column-end: 4;
-  grid-row: 1;
+  /*grid-row: 1;*/
   height: fit-content;
-  margin: 10px;
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #201f1f;
 }
 
 .imgHeader {
   width: 150px;
+}
+
+.buttonSignOut {
+  width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .newPostContainer {
@@ -57,14 +68,59 @@
   flex-direction: column;
 }
 
+.formNewPostContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.buttonNewPost {
+  justify-content: end;
+  background-color: #f25c5c;
+  max-width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+}
+
 .post-feed {
   grid-column: 2;
   grid-row: 3;
   margin: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .postDiv {
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid grey;
+  gap: 5px;
+  border-radius: 5px;
+}
+
+.postHeader {
+  display: flex;
+  flex-direction: row;
+  background-color: #f26db6;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.userNamePost, .buttonsPosts {
+  color: white;
+  padding: 10px;
+}
+
+.postContainer {
+  padding: 10px;
+}
+
+.buttonsLikePosts {
+  padding: 10px;
+  display: flex;
+  gap: 5px;
+  flex-direction: row-reverse;
 }
 
 /*
