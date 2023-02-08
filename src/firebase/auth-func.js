@@ -10,7 +10,7 @@ import {
 } from "./firebase.js";
 //Crear Usuario
 
-export const signUpWithPass = async (email, password, displayName) => {
+export const signUpWithPass = async (auth, email, password, displayName) => {
 	return await createUserWithEmailAndPassword(auth, email, password)
 		.then((userCredential) => {
 			// Signed in
