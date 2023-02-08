@@ -27,9 +27,11 @@ export const feed = () => {
 	imgHeader.classList = "imgHeader";
 
 	const inputSearchHeader = document.createElement("input");
+	inputSearchHeader.className = 'inputSearchHeader'
 	inputSearchHeader.placeholder = "tu búsqueda";
 
 	const buttonSignOut = document.createElement("button");
+	buttonSignOut.className = 'buttonSignOut'
 	buttonSignOut.textContent = "Cerrar Sesión";
 
 	const newPostContainer = document.createElement("div");
@@ -37,6 +39,7 @@ export const feed = () => {
 	const formNewPostContainer = document.createElement("form");
 	formNewPostContainer.classList = "formNewPostContainer";
 	const inputNewPostLocation = document.createElement("input");
+	inputNewPostLocation.className = 'inputNewPostLocation'
 	inputNewPostLocation.placeholder = "ubicación";
 
 	//const inputNewPostTag = document.createElement("input");
@@ -45,6 +48,7 @@ export const feed = () => {
 	const textAreaNewPost = document.createElement("textarea");
 	textAreaNewPost.classList = "textAreaNewPost";
 	const buttonNewPost = document.createElement("button");
+	buttonNewPost.className = 'buttonNewPost'
 	buttonNewPost.textContent = "publicar";
 	const allPostsContainer = document.createElement("section");
 	allPostsContainer.className = "post-feed";
