@@ -47,6 +47,9 @@ jest.mock("../src/Firebase/firebase.js", () => {
 			}
 			return Promise.resolve();
 		}),
+		signOut: jest.fn((auth)=>{
+			if (!auth) return Promise.reject('ningún usuario logueado')
+		}),
 	};
 });
 
@@ -106,4 +109,9 @@ describe("Test de Inicio de sesión con correo y contraseña", () => {
 			expect(error.code).toBe("Correo ingresado válido");
 		}
 	});
+
+	it('debe llamar a función signOut', async()=>{
+		await logout(auth)
+		expect(signOut).toHaveBeenCalled()
+	})
 });
