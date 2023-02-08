@@ -96,7 +96,7 @@ export const home = () => {
 					emailLogin,
 					passwordLogin
 				);
-				console.log(userCredentials.user);
+				//console.log(userCredentials.user);
 				toNavigate("/feed");
 			} catch (error) {
 				if (error.code === "auth/user-not-found") {
