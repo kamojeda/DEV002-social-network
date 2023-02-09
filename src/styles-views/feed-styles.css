@@ -105,6 +105,7 @@ textarea{
 
 .buttonNewPost {
   justify-content: end;
+  color: #fcfdff;
   background-color: #f25c5c;
   max-width: fit-content;
   padding: 5px;
@@ -149,8 +150,25 @@ textarea{
   color: var(--neutral-background);
 }
 
+.buttonDelete{
+  color: #fcfdff;
+  background-color:#03a678;
+  border-radius: 5px;
+}
+
+.buttonEdit{
+  color: #fcfdff;
+  background-color:#03a678;
+  border-radius: 5px;
+}
+
 .buttonSaveEdit {
   margin: 1em;
+  color: #fcfdff;
+  background-color: #f26db6;
+  width: 45%;
+  height: 25%;
+  border-radius: 10px;
 }
 
 .buttonsLikePosts {

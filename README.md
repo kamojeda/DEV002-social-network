@@ -47,5 +47,12 @@ Desarrollamos las Historias de Usuario en base a las necesidades que pudimos obs
 
 ### ***Prototipo de baja fidelidad***
 
+![prototipoBaja](src/img/prototipoBaja.png)
 
 ### ***Prototipo de Alta fidelidad***
+
+![prototipo1](src/img/prototipo1.png)
+![prototipo2](src/img/prototipo2.png)
+
+### ***Prototipo Final***
+

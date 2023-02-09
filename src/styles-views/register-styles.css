@@ -48,6 +48,11 @@
     justify-content: center;
 }
 
+.title-register{
+    text-align: center;
+    margin: 8px 0px 15px 0px;
+}
+
 .img-logo-register {
     width: 95px;
     transform: rotate(45deg);

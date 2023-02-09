@@ -78,9 +78,11 @@ export const register = () => {
 	//Clases y Placeholder
 	registerDiv.className = "register-div";
 	containerRegisterTitle.textContent = "Regístrate";
+	containerRegisterTitle.className = "title-register";
 	containerLogoRegister.className = "container-logo-register";
 	imgLogoRegister.src = "../img/sandia-logo.png";
 	imgLogoRegister.className = "img-logo-register";
+	
 	containerRegister.className = "container-register";
 	containerRegisterForm.className = "container-register-form";
 	registerForm.className = "register-form";
