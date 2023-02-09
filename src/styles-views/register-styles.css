@@ -19,13 +19,13 @@
 .register-div {
     display: grid;
     grid-template-columns: 1fr;
-    /* grid-template-rows: repeat(1); */
     justify-items: center;
     align-content: center;
     row-gap: 5px;
     width: 100%;
     height: 100vh;
     font-family: var(--secundary-font-family);
+    font-size: 20px;
     min-height: 500px;
     background-image: var(--bg-image);
     background-position: center;
@@ -61,9 +61,10 @@
 }
 
 .container-register {
+    display: grid;
     grid-row-start: 1;
     grid-row-end: 2;
-    margin-top: 90px;
+    margin-top: 0px;
 }
 
 .container-register-form{
@@ -71,7 +72,7 @@
 }
 
 .register-form {
-    display: flex;
+    display: grid;
     flex-direction: column;
     align-items: left;
     margin: 15px 15px 15px 15px;
@@ -160,7 +161,6 @@
 .userName {
     font-size: 15px;
     font-weight: bold;
-
 }
 
 .userCity {
@@ -228,5 +228,3 @@ option {
     cursor: pointer;
     transform: scale(1.05);
 }
-
-/* Media Queries */
