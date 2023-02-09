@@ -1,11 +1,9 @@
 import { toNavigate } from "../main.js";
-//import { auth } from "../Firebase/firebase.js";
-import { auth, signUpWithPass } from "../Firebase/auth-func.js";
-//import { getFirestore } from "../src/firebase/firestore.js";
+import { auth } from "../Firebase/firebase.js";
+import { signUpWithPass, updateProfile } from "../Firebase/auth-func.js";
 
 export const register = () => {
 	//Creamos elementos de para el formulario de registro
-
 	const registerDiv = document.createElement("div");
 	const containerRegister = document.createElement("section");
 	const containerRegisterTitle = document.createElement("h1");
@@ -17,10 +15,12 @@ export const register = () => {
 	//Nombre
 	const labelUserName = document.createElement("label");
 	const inputUserName = document.createElement("input");
+	const paragraphNameError = document.createElement("p");
 
 	//Ciudad
 	const labelUserCity = document.createElement("label");
 	const inputUserCity = document.createElement("input");
+	const paragraphCityError = document.createElement("p");
 
 	//País
 	const labelUserCountry = document.createElement("label");
@@ -29,12 +29,15 @@ export const register = () => {
 	//Mail
 	const labelUserMail = document.createElement("label");
 	const inputUserMail = document.createElement("input");
+	const paragraphRegisterMailError = document.createElement("p");
 
 	//Contraseña y Verificación Contraseña
 	const labelUserPass = document.createElement("label");
 	const inputUserPass = document.createElement("input");
+	const paragraphRegisterPassError = document.createElement("p");
 	const labelUserCheckPass = document.createElement("label");
 	const inputUserCheckPass = document.createElement("input");
+	const paragraphCheckPassError = document.createElement("p");
 
 	//Selector
 	const selectIsVegan = document.createElement("select");
@@ -85,29 +88,37 @@ export const register = () => {
 	labelUserName.textContent = "Nombre de Usuario";
 	inputUserName.className = "input-Name-User";
 	inputUserName.placeholder = "Juanita";
+	paragraphNameError.className = "paragraph-name-error hide-error-message";
 
 	labelUserCity.className = "userCity labels-r";
 	labelUserCity.textContent = "Ciudad, País";
 	inputUserCity.className = "input-City-User";
 	inputUserCity.placeholder = "Lima, Perú";
+	paragraphCityError.className = "paragraph-city-error hide-error-message";
 
 	labelUserMail.className = "userMail labels-r";
 	labelUserMail.textContent = "Correo electrónico";
 	inputUserMail.type = "email";
 	inputUserMail.className = "input-Mail-User";
 	inputUserMail.placeholder = "example@gmail.com";
+	paragraphRegisterMailError.className =
+		"paragraph-register-mail-error hide-error-message";
 
 	labelUserPass.className = "userPassword labels-r";
 	labelUserPass.textContent = "Contraseña";
 	inputUserPass.type = "password";
 	inputUserPass.className = "input-Pass-User";
-	inputUserPass.placeholder = "xxxxxxxxxx";
+	inputUserPass.placeholder = "***************";
+	paragraphRegisterPassError.className =
+		"paragraph-register-pass-error hide-error-message";
 
 	labelUserCheckPass.className = "userCheckPass labels-r";
 	labelUserCheckPass.textContent = "Verificar contraseña";
 	inputUserCheckPass.type = "password";
 	inputUserCheckPass.className = "input-Check-Pass";
-	inputUserCheckPass.placeholder = "xxxxxxxxxx";
+	inputUserCheckPass.placeholder = "***************";
+	paragraphCheckPassError.className =
+		"paragraph-check-pass-error hide-error-message";
 
 	labelSelectVegan.className = "label-user-select labels-r";
 	labelSelectVegan.textContent = "¿Eres vegano?";
@@ -124,55 +135,60 @@ export const register = () => {
 
 	registerForm.appendChild(labelUserName);
 	registerForm.appendChild(inputUserName);
+	registerForm.appendChild(paragraphNameError);
 	registerForm.appendChild(labelUserCity);
 	registerForm.appendChild(inputUserCity);
+	registerForm.appendChild(paragraphCityError);
 	registerForm.appendChild(labelUserMail);
 	registerForm.appendChild(inputUserMail);
+	registerForm.appendChild(paragraphRegisterMailError);
 	registerForm.appendChild(labelUserPass);
 	registerForm.appendChild(inputUserPass);
+	registerForm.appendChild(paragraphRegisterPassError);
 	registerForm.appendChild(labelUserCheckPass);
 	registerForm.appendChild(inputUserCheckPass);
+	registerForm.appendChild(paragraphCheckPassError);
 	registerForm.appendChild(labelSelectVegan);
 	registerForm.appendChild(selectIsVegan);
 	registerForm.appendChild(buttonRegister);
 
+	const emailForm = inputUserMail.value;
+	const passwordForm = inputUserPass.value;
+	const checkPassForm = inputUserCheckPass.value;
+	const nameForm = inputUserName.value;
+	const cityForm = inputUserCity.value;
 	buttonRegister.addEventListener("click", () => {
-		registerForm.addEventListener("submit", async (e) => {
+		registerForm.addEventListener("submit", (e) => {
 			e.preventDefault(); //cancela comportamiento por defecto de refrescar la pagina
-			try {
-				const emailForm = inputUserMail.value;
-				const passwordForm = inputUserPass.value;
-				const nameForm = inputUserName.value;
-				const cityForm = inputUserCity.value;
-				const userCredentials = await signUpWithPass(
-					auth,
-					emailForm,
-					passwordForm,
-					nameForm
-				);
-				console.log("llega hasta acá", userCredentials);
-			} catch (error) {
-				if (error.code === "auth/invalid-email") {
-					alert("email inválido");
-				} else if (error.code === "auth/weak-password") {
-					alert("contraseña débil");
-				} else if (error.code === "auth/email-already-in-use") {
-					alert("email en uso");
-				} else if (error.code) {
-					alert("algo anda mal");
-				}
+			if (nameForm) {
+				signUpWithPass(auth, emailForm, passwordForm, nameForm)
+					.then(() => {
+						updateProfile(auth.currentUser, { nameForm });
+						toNavigate("/registerOk");
+					})
+					.catch((error) => {
+						console.log(error + ": ERROR");
+
+						if (error.code === "auth/invalid-email") {
+							paragraphRegisterMailError.textContent = "Ingrese un correo válido";
+							paragraphRegisterMailError.style = "display: block";
+						} else if (error.code === "auth/email-already-in-use") {
+							paragraphRegisterMailError.textContent =
+								"El correo ya se encuentra registrado. Puedes iniciar sesión.";
+							paragraphRegisterMailError.style = "display: block";
+						} else if (error.code === "auth/weak-password") {
+							paragraphRegisterPassError.textContent =
+								"Ingrese una contraseña de 6 a más dígitos.";
+							paragraphRegisterPassError.style = "display: block";
+						} else if (error.code) {
+							return alert("Por favor, omplete los datos de registro.");
+						}
+					});
+			} else {
+				paragraphNameError.textContent = "Ingrese un nombre de usuario";
+				paragraphNameError.style = "display: block";
 			}
-			toNavigate("/registerOk");
 		});
 	});
 	return registerDiv;
 };
-// const docRef = doc(getFirestore(), "document", auth.currentUser.uid);
-// const usersDocs = await setDoc(docRef, "documents", {
-// 	email: auth.currentUser.email,
-// 	userName: auth.currentUser.displayName,
-// 	uid: auth.currentUser.uid,
-// 	location: cityForm.value,
-// 	isVegan: document.querySelector("#selectVegan").value,
-// });
-// console.log(usersDocs);

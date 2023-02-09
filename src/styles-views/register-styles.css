@@ -67,7 +67,7 @@
     margin-top: 0px;
 }
 
-.container-register-form{
+.container-register-form {
     display: grid;
 }
 
@@ -92,6 +92,14 @@
     color: rgba(31, 30, 28, 0.5);
     font-style: italic;
     font-size: 15px;
+}
+
+.hide-error-message {
+    color: var(--secondary-red);
+    font-style: italic;
+    font-size: 0.8em;
+    margin-top: 0.4em;
+    margin-left: 0.4em;
 }
 
 .input-City-User {

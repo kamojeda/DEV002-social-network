@@ -8,27 +8,24 @@ import {
 	signInWithEmailAndPassword,
 	updateProfile,
 } from "./firebase.js";
-//Crear Usuario
 
-export const signUpWithPass = async (email, password, displayName) => {
-	return await createUserWithEmailAndPassword(auth, email, password)
-		.then((userCredential) => {
-			// Signed in
-			console.log(userCredential);
-			updateProfile(auth.currentUser, { displayName });
-			return userCredential;
-		})
-		.catch((error) => {
-			console.log(error.code);
-			console.log(error.message);
-		});
+//Crear Usuario
+export const signUpWithPass = (auth, email, password, displayName) => {
+	return createUserWithEmailAndPassword(auth, email, password);
+	// .then((userCredential) => {
+	// 	updateProfile(auth.currentUser, { displayName });
+	// 	return userCredential;
+	// })
+	// .catch((error) => {
+	// 	console.error(error + ": ERROR");
+	// });
 };
 export const getDisplayName = (userNameFromRegister) =>
 	updateProfile(auth.currentUser, {
 		displayName: userNameFromRegister,
 	});
-export const signInWithPass = (auth, email, password) =>
-	signInWithEmailAndPassword(auth, email, password);
+export const signInWithPass = async (auth, email, password) =>
+	await signInWithEmailAndPassword(auth, email, password);
 
 //obtener currentUser
 export const userSignedIn = () => auth.currentUser;
@@ -52,4 +49,4 @@ export const viewer = () => {
 export const logout = (auth) => signOut(auth);
 export const popUpGoogle = (auth, provider) => signInWithPopup(auth, provider);
 
-export { auth };
+export { updateProfile };
