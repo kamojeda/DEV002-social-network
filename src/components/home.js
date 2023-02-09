@@ -7,7 +7,6 @@ export const home = () => {
 	//const containerHeader = document.createElement("header");
 	//const imgHeader = document.createElement("img");
 	const homeDiv = document.createElement("div");
-	const container = document.createElement("section");
 	const containerHeader = document.createElement("header");
 	const imgLogo = document.createElement("img");
 	const containerForm = document.createElement("div");
@@ -20,12 +19,11 @@ export const home = () => {
 	const containerGoogle = document.createElement("div");
 	const iconLogoGoogle = document.createElement("i");
 	const buttonGoogle = document.createElement("button");
-	const containerRegister = document.createElement("div");
+	const containerRegisterHome = document.createElement("div");
 	const labelRegister = document.createElement("label");
 	const hrefRegister = document.createElement("a");
 
 	homeDiv.className = "div-container";
-	container.className = "container";
 	containerHeader.className = "container-header";
 	//imgHeader.className = "img-header";
 	imgLogo.src = "../img/Logo VeganShip.png";
@@ -54,33 +52,28 @@ export const home = () => {
 	iconLogoGoogle.className = "fa-brands fa-google";
 	buttonGoogle.textContent = "Continuar con Google";
 	buttonGoogle.className = "button-google buttons";
-	containerRegister.className = "container-register";
+	containerRegisterHome.className = "container-register-home";
 	labelRegister.className = "label-reg labels";
 	labelRegister.textContent = "¿No tienes una cuenta?";
 	hrefRegister.textContent = "Regístrate";
 	hrefRegister.className = "href-register";
 
 	//homeDiv.appendChild(loginForm);
-	homeDiv.appendChild(container);
-	container.appendChild(containerHeader);
+	homeDiv.appendChild(containerHeader);
 	containerHeader.appendChild(imgLogo);
-	container.appendChild(containerForm);
+	homeDiv.appendChild(containerForm);
 	containerForm.appendChild(loginForm);
 	loginForm.appendChild(labelMail);
 	loginForm.appendChild(inputMail);
 	loginForm.appendChild(labelPassword);
 	loginForm.appendChild(inputPassword);
 	loginForm.appendChild(buttonLogin);
-	container.appendChild(containerGoogle);
+	homeDiv.appendChild(containerGoogle);
 	containerGoogle.appendChild(buttonGoogle);
 	buttonGoogle.appendChild(iconLogoGoogle);
-	container.appendChild(containerRegister);
-	containerRegister.appendChild(labelRegister);
-	containerRegister.appendChild(hrefRegister);
-
-	//loginForm.appendChild(loginForm);
-	// loginForm.appendChild(hrefRegister);
-	// loginForm.appendChild(buttonGoogle);
+	homeDiv.appendChild(containerRegisterHome);
+	containerRegisterHome.appendChild(labelRegister);
+	containerRegisterHome.appendChild(hrefRegister);
 
 	viewer();
 
@@ -96,7 +89,7 @@ export const home = () => {
 					emailLogin,
 					passwordLogin
 				);
-				console.log(userCredentials.user);
+				//console.log(userCredentials.user);
 				toNavigate("/feed");
 			} catch (error) {
 				if (error.code === "auth/user-not-found") {

@@ -13,7 +13,6 @@ import {
 	getDisplayName,
 	signUpWithPass,
 	userSignedIn,
-	viewer,
 	logout,
 	popUpGoogle,
 } from "../src/firebase/auth-func.js";
@@ -47,10 +46,10 @@ jest.mock("../src/Firebase/firebase.js", () => {
 			}
 			return Promise.resolve();
 		}),
-		signOut: jest.fn((auth)=>{
-			if (!auth) return Promise.reject('ningún usuario logueado')
+		signOut: jest.fn((auth) => {
+			if (!auth) return Promise.reject("ningún usuario logueado");
 		}),
-		updateProfile: jest.fn((auth, displayName)=> {
+		updateProfile: jest.fn((auth, displayName) => {
 			if (!auth === !displayName) {
 				return Promise.resolve();
 			}
@@ -59,8 +58,8 @@ jest.mock("../src/Firebase/firebase.js", () => {
 			if (!auth) {
 				throw new Error("ERROR");
 			}
-			Promise.resolve({ user: 'Carla' })
-		})
+			Promise.resolve({ user: "Carla" });
+		}),
 	};
 });
 
@@ -121,25 +120,25 @@ describe("Test de Inicio de sesión con correo y contraseña", () => {
 		}
 	});
 
-	it('debe llamar a función signOut', async()=>{
-		await logout(auth)
-		expect(signOut).toHaveBeenCalled()
-	})
+	it("debe llamar a función signOut", async () => {
+		await logout(auth);
+		expect(signOut).toHaveBeenCalled();
+	});
 });
 
 describe("Test para guardar el DisplayName del usuario", () => {
 	it("updateProfile debería ser una función", async () => {
-		try{
-			await updateProfile(getDisplayName)
-		}catch(error){
-			expect(error).toBe('no displayName or auth')
+		try {
+			await updateProfile(getDisplayName);
+		} catch (error) {
+			expect(error).toBe("no displayName or auth");
 		}
 	});
 });
 
 describe("Test de Inicio de sesión con cuenta Google", () => {
 	it("signInWithPopup debería ser una función", () => {
-		expect(typeof signInWithPopup).toBe("function")
+		expect(typeof signInWithPopup).toBe("function");
 	});
 	it("debería llamar a signInWithPopup", async () => {
 		await signInWithPopup(auth, provider);
@@ -148,5 +147,5 @@ describe("Test de Inicio de sesión con cuenta Google", () => {
 	it("debería llamar signInWithPopup con auth y provider", async () => {
 		await signInWithPopup(auth, provider);
 		expect(signInWithPopup).toHaveBeenCalledWith(auth, provider);
-	})
+	});
 });

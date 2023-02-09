@@ -11,12 +11,13 @@ import {
 	orderBy,
 	giveLike,
 	dislike,
-	getPost,
+	getPost
 } from "../firebase/firestore-funct.js";
 import { postPrint } from "../components/post.js";
 
 export const feed = () => {
 	//Creamos elementos del Feed
+	const mainFeed = document.createElement('main');	
 	const feedDiv = document.createElement("div");
 	feedDiv.classList = "feedDiv";
 	const headerFeed = document.createElement("header");
@@ -26,9 +27,9 @@ export const feed = () => {
 	imgHeader.src = "../img/Logo VeganShip.png";
 	imgHeader.classList = "imgHeader";
 
-	const inputSearchHeader = document.createElement("input");
-	inputSearchHeader.className = 'inputSearchHeader'
-	inputSearchHeader.placeholder = "tu búsqueda";
+	// const inputSearchHeader = document.createElement("input");
+	// inputSearchHeader.className = 'inputSearchHeader'
+	// inputSearchHeader.placeholder = "tu búsqueda";
 
 	const buttonSignOut = document.createElement("button");
 	buttonSignOut.className = 'buttonSignOut'
@@ -38,28 +39,30 @@ export const feed = () => {
 	newPostContainer.className = "newPostContainer";
 	const formNewPostContainer = document.createElement("form");
 	formNewPostContainer.classList = "formNewPostContainer";
-	const inputNewPostLocation = document.createElement("input");
-	inputNewPostLocation.className = 'inputNewPostLocation'
-	inputNewPostLocation.placeholder = "ubicación";
+	// const inputNewPostLocation = document.createElement("input");
+	// inputNewPostLocation.className = 'inputNewPostLocation'
+	// inputNewPostLocation.placeholder = "ubicación";
 
 	//const inputNewPostTag = document.createElement("input");
 	//inputNewPostTag.placeholder = "etiquetas";
 
 	const textAreaNewPost = document.createElement("textarea");
 	textAreaNewPost.classList = "textAreaNewPost";
+	textAreaNewPost.placeholder = 'Escribe tu post aquí'
 	const buttonNewPost = document.createElement("button");
 	buttonNewPost.className = 'buttonNewPost'
 	buttonNewPost.textContent = "publicar";
 	const allPostsContainer = document.createElement("section");
 	allPostsContainer.className = "post-feed";
 
+	mainFeed.appendChild(feedDiv)
 	feedDiv.appendChild(headerFeed);
 	headerFeed.appendChild(imgHeader);
-	headerFeed.appendChild(inputSearchHeader);
 	headerFeed.appendChild(buttonSignOut);
+	//headerFeed.appendChild(inputSearchHeader);	
 	feedDiv.appendChild(newPostContainer);
 	newPostContainer.appendChild(formNewPostContainer);
-	formNewPostContainer.appendChild(inputNewPostLocation);
+	//formNewPostContainer.appendChild(inputNewPostLocation);
 	//formNewPostContainer.appendChild(inputNewPostTag);
 	formNewPostContainer.appendChild(textAreaNewPost);
 	formNewPostContainer.appendChild(buttonNewPost);
@@ -174,7 +177,7 @@ const listenEditButton = (post) => {
 
 	editButton.addEventListener("click", () => {
 		postArea.style.display = "none"; // to hide
-		formEditingArea.style.display = "block"; // to show
+		formEditingArea.style.display = "flex"; // to show
 
 		editPostTextArea.value = post.data().post;
 	});
