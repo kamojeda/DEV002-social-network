@@ -8,8 +8,8 @@ import {
 	signInWithEmailAndPassword,
 	updateProfile,
 } from "./firebase.js";
-//Crear Usuario
 
+//Crear Usuario
 export const signUpWithPass = (auth, email, password, displayName) => {
 	return createUserWithEmailAndPassword(auth, email, password);
 	// .then((userCredential) => {
