@@ -23,22 +23,23 @@
   --neutral-font: #fcfdff;
   --tittles-font-family: 'Oleo Script', cursive;
   --secundary-font-family: 'Roboto', sans-serif;
+  --bg-image-feed: url("../img/25x25 patron.png");
 }
 
 .feedDiv {
   display: grid;
-  grid-template-columns: 1fr 5fr 1fr;
+  grid-template-columns: 15% 70% 15%;
   grid-template-rows: auto auto auto;
-  /*row-gap: 15px;
+  row-gap: 3rem;
+  /*
     grid-gap: 1fr;
     background-color: var(--neutral-background);*/
   width: 100%;
   height: 100%;
   font-family: var(--secundary-font-family);
-}
-
-textarea{
-  resize: none;
+  background-image: var(--bg-image-feed);
+  background-size: 190%;
+  background-attachment: fixed;
 }
 
 .headerFeed {
@@ -47,27 +48,28 @@ textarea{
   /*grid-row: 1;*/
   height: fit-content;
   margin: 0;
-  padding: 10px 20px;
+  padding: 1em 1em 2em 1em;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  gap: 15px;
   background-color: #201f1f;
-  align-items: center;  
+  align-items: center;
+  justify-content: space-between;  
 }
 
 .imgHeader {
   width: 60%;
   height: auto;
+  max-width: 300px;
 }
 
-.inputSearchHeader{
-  max-width: 70%;
+/* .inputSearchHeader{
+  width: 60%;
+  max-width: 300px;
   height: 1rem;
   padding: 10px;
   border-radius: 50px;
-  border: 2px solid #84bf04;
-}
+  border: 2px solid var(--complementary-green);
+} */
 
 .buttonSignOut {
   width: fit-content;
@@ -79,16 +81,49 @@ textarea{
 .newPostContainer {
   grid-column: 2;
   grid-row: 2;
-  margin: 10px;
+  grid-column-start: 2;
+  grid-column-end: 3;  
   display: flex;
   flex-direction: column;
+  border: 3px solid var(--complementary-green);
+  border-top: 3rem solid var(--complementary-green);
+  border-radius: 20px;
+  padding: 1rem;
+  padding-top: 0;  
+  background-color: var(--neutral-font);
 }
 
-.formNewPostContainer {
+.formNewPostContainer {  
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
+
+.textAreaNewPost, .editTextArea {
+  height: 5rem;
+  padding: 1em;
+  font-size: large;
+  outline: none;
+}
+
+.editTextArea {
+  width: 100%;
+} 
+
+.formEditTextArea {  
+  width: 100%;
+  justify-content: space-between;
+  align-items: last baseline;
+}
+
+textarea{
+  resize: none;
+  border: none;
+  height: 4rem;
+  font-family: var(--secundary-font-family);
+  padding: 1em;  
+}
+
 
 .buttonNewPost {
   justify-content: end;
@@ -100,27 +135,29 @@ textarea{
 
 .post-feed {
   grid-column: 2;
-  grid-row: 3;
-  margin: 10px;
+  grid-row: 3;  
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  /*gap: 2em;*/
 }
 
 .postDiv {
   display: flex;
   flex-direction: column;
-  border: 1px solid grey;
+  border: 3px solid var(--complementary-pink);
   gap: 5px;
-  border-radius: 5px;
+  border-radius: 20px;
+  background-color: var(--neutral-font);
+  margin-bottom: 2em;
 }
 
 .postHeader {
   display: flex;
   flex-direction: row;
-  background-color: #f26db6;
+  background-color: var(--complementary-pink);
   justify-content: space-between;
   padding: 5px;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .userNamePost, .buttonsPosts {
@@ -129,11 +166,18 @@ textarea{
 }
 
 .postContainer {
-  padding: 10px;
+  padding: 1em 2em;
+  padding-top: 1em; 
+  font-family: var(--secundary-font-family); 
+  color: var(--neutral-background);
+}
+
+.buttonSaveEdit {
+  margin: 1em;
 }
 
 .buttonsLikePosts {
-  padding: 10px;
+  padding: 1em;
   display: flex;
   gap: 5px;
   flex-direction: row-reverse;
