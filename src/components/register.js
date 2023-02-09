@@ -1,7 +1,6 @@
 import { toNavigate } from "../main.js";
 import { auth } from "../Firebase/firebase.js";
 import { signUpWithPass, updateProfile } from "../Firebase/auth-func.js";
-//import { getFirestore } from "../src/firebase/firestore.js";
 
 export const register = () => {
 	//Creamos elementos de para el formulario de registro
@@ -196,12 +195,3 @@ export const register = () => {
 	});
 	return registerDiv;
 };
-// const docRef = doc(getFirestore(), "document", auth.currentUser.uid);
-// const usersDocs = await setDoc(docRef, "documents", {
-// 	email: auth.currentUser.email,
-// 	userName: auth.currentUser.displayName,
-// 	uid: auth.currentUser.uid,
-// 	location: cityForm.value,
-// 	isVegan: document.querySelector("#selectVegan").value,
-// });
-// console.log(usersDocs);

@@ -12,13 +12,6 @@ import {
 //Crear Usuario
 export const signUpWithPass = (auth, email, password, displayName) => {
 	return createUserWithEmailAndPassword(auth, email, password);
-	// .then((userCredential) => {
-	// 	updateProfile(auth.currentUser, { displayName });
-	// 	return userCredential;
-	// })
-	// .catch((error) => {
-	// 	console.error(error + ": ERROR");
-	// });
 };
 export const getDisplayName = (userNameFromRegister) =>
 	updateProfile(auth.currentUser, {

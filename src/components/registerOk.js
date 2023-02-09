@@ -2,12 +2,8 @@ import { toNavigate } from "../main.js";
 import { auth } from "../Firebase/firebase.js";
 
 export const registerOk = () => {
-	// const user = auth.currentUser;
-	// const displayName = user.displayName;
 	const registerOkDiv = document.createElement("div");
 	const containerOk = document.createElement("section");
-	// const containerOkBackground = document.createElement("div");
-	// const imgOkBackground = document.createElement("img");
 	const containerOkIcon = document.createElement("figure");
 	const imgOkLogo = document.createElement("img");
 	const containerOkMessage = document.createElement("div");
@@ -28,7 +24,6 @@ export const registerOk = () => {
 	paragraphOkHello.className = "ok-p-hello";
 	paragraphOkHello.textContent = "Hola, ";
 	paragraphName.className = "ok-p-hello";
-	// paragraphName.textContent = displayName;
 	paragraphOkMessage.className = "ok-p-message";
 	paragraphOkMessage.textContent =
 		"Te damos la bienvenida de VeganShip, donde podrás compartir con personas del mundo vegano";

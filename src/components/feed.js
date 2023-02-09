@@ -27,10 +27,6 @@ export const feed = () => {
 	imgHeader.src = "../img/Logo VeganShip.png";
 	imgHeader.classList = "imgHeader";
 
-	// const inputSearchHeader = document.createElement("input");
-	// inputSearchHeader.className = 'inputSearchHeader'
-	// inputSearchHeader.placeholder = "tu búsqueda";
-
 	const buttonSignOut = document.createElement("button");
 	buttonSignOut.className = "buttonSignOut";
 	buttonSignOut.textContent = "Cerrar Sesión";
@@ -39,12 +35,6 @@ export const feed = () => {
 	newPostContainer.className = "newPostContainer";
 	const formNewPostContainer = document.createElement("form");
 	formNewPostContainer.classList = "formNewPostContainer";
-	// const inputNewPostLocation = document.createElement("input");
-	// inputNewPostLocation.className = 'inputNewPostLocation'
-	// inputNewPostLocation.placeholder = "ubicación";
-
-	//const inputNewPostTag = document.createElement("input");
-	//inputNewPostTag.placeholder = "etiquetas";
 
 	const textAreaNewPost = document.createElement("textarea");
 	textAreaNewPost.classList = "textAreaNewPost";
@@ -58,12 +48,9 @@ export const feed = () => {
 	mainFeed.appendChild(feedDiv)
 	feedDiv.appendChild(headerFeed);
 	headerFeed.appendChild(imgHeader);
-	headerFeed.appendChild(buttonSignOut);
-	//headerFeed.appendChild(inputSearchHeader);	
+	headerFeed.appendChild(buttonSignOut);	
 	feedDiv.appendChild(newPostContainer);
 	newPostContainer.appendChild(formNewPostContainer);
-	//formNewPostContainer.appendChild(inputNewPostLocation);
-	//formNewPostContainer.appendChild(inputNewPostTag);
 	formNewPostContainer.appendChild(textAreaNewPost);
 	formNewPostContainer.appendChild(buttonNewPost);
 	feedDiv.appendChild(allPostsContainer);
@@ -72,7 +59,6 @@ export const feed = () => {
 		const queryRef = query(
 			collection(db, "documents"),
 			orderBy("createdAt", "desc")
-			//authCredentials(currentUser)
 		);
 		listenPublishButton();
 

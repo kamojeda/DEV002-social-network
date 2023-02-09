@@ -36,7 +36,6 @@ export const home = () => {
 	inputMail.placeholder = "tucorreo@gmail.com";
 	inputMail.required = "true";
 	paragraphMailError.className = "paragraph-mail-error hide-error-message";
-	// paragraphMailError.textContent = "Por favor, ingresa un correo";
 	labelPassword.className = "label-pass labels";
 	labelPassword.textContent = "Contraseña";
 	inputPassword.type = "text";
@@ -46,8 +45,6 @@ export const home = () => {
 	inputPassword.type = "password";
 	inputPassword.required = "true";
 	paragraphPassError.className = "paragraph-pass-error hide-error-message";
-	// paragraphPassError.textContent = "Por favor, ingresa una contraseña";
-	// paragraphPassError.style = "display: none";
 	buttonLogin.textContent = "Iniciar sesión";
 	buttonLogin.className = "button-login buttons";
 	containerGoogle.className = "container-google";

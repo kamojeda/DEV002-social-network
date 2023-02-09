@@ -155,7 +155,7 @@
 }
 
 /* Responsive */
-@media screen and (min-width: 390px) and (max-width: 779px) {
+@media screen and (min-width: 460px) and (max-width: 779px) {
   .div-container {
     row-gap: 1em;
   }
