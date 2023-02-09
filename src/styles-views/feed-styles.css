@@ -180,7 +180,17 @@ textarea{
   padding: 1em;
   display: flex;
   gap: 5px;
-  flex-direction: row-reverse;
+  flex-direction: row-reverse;  
+}
+
+.fa-heart{
+  font-size: 1.5em;
+}
+
+.buttonLike{
+  width: fit-content;
+  background-color: transparent;
+  border: none;
 }
 
 /*
