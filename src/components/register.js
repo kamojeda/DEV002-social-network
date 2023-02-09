@@ -184,7 +184,7 @@ export const register = () => {
 								"Ingrese una contraseña de 6 a más dígitos.";
 							paragraphRegisterPassError.style = "display: block";
 						} else if (error.code) {
-							return alert("Por favor, omplete los datos de registro.");
+							return alert("Por favor, complete los datos de registro.");
 						}
 					});
 			} else {

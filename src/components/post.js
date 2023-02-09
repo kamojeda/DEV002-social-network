@@ -15,7 +15,7 @@ export const postPrint = (doc) => {
     </form>
     
     <div class = "buttonsLikePosts">
-    <button class = "buttonLike" id = "buttonLike" data-id="${doc.id}"> likes
+    <button class = "buttonLike" id = "buttonLike" data-id="${doc.id}">likes
         <i class="fa-solid fa-heart"></i>
     </button>
     <span class = "likeCounter">${docs.likes.length}</span>
