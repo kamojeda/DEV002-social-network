@@ -68,6 +68,11 @@ describe("Test de Crear cuenta con correo y contrseña", () => {
 	const password = "prueba123456";
 	const displayName = "Vaquita";
 
+	it("Debe llamar a signUpWithPass", async () => {
+		await signUpWithPass(auth, email, password);
+		expect(createUserWithEmailAndPassword).toHaveBeenCalled();
+	});
+
 	it("Debe retornar un error de campo de correo vacío", async () => {
 		try {
 			await signUpWithPass(auth, " ", password);
@@ -96,6 +101,11 @@ describe("Test de Crear cuenta con correo y contrseña", () => {
 describe("Test de Inicio de sesión con correo y contraseña", () => {
 	const email = "veganship@gmailcom";
 	const password = "prueba123456";
+
+	it("Debe llamar a signInWithEmailAndPassword", async () => {
+		await signInWithPass(auth, email, password);
+		expect(signInWithEmailAndPassword).toHaveBeenCalled();
+	});
 
 	it("Debe retornar un error de campo de correo vacío", async () => {
 		try {
