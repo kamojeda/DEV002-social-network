@@ -1,9 +1,11 @@
 import { toNavigate } from "../main.js";
 import { auth } from "../Firebase/firebase.js";
 import { signUpWithPass, updateProfile } from "../Firebase/auth-func.js";
+//import { getFirestore } from "../src/firebase/firestore.js";
 
 export const register = () => {
 	//Creamos elementos de para el formulario de registro
+
 	const registerDiv = document.createElement("div");
 	const containerRegister = document.createElement("section");
 	const containerRegisterTitle = document.createElement("h1");
@@ -152,15 +154,17 @@ export const register = () => {
 	registerForm.appendChild(selectIsVegan);
 	registerForm.appendChild(buttonRegister);
 
-	const emailForm = inputUserMail.value;
-	const passwordForm = inputUserPass.value;
-	const checkPassForm = inputUserCheckPass.value;
-	const nameForm = inputUserName.value;
-	const cityForm = inputUserCity.value;
 	buttonRegister.addEventListener("click", () => {
 		registerForm.addEventListener("submit", (e) => {
 			e.preventDefault(); //cancela comportamiento por defecto de refrescar la pagina
+			const emailForm = inputUserMail.value;
+			const passwordForm = inputUserPass.value;
+			const checkPassForm = inputUserCheckPass.value;
+			const nameForm = inputUserName.value;
+			const cityForm = inputUserCity.value;
+
 			if (nameForm) {
+				console.log(nameForm);
 				signUpWithPass(auth, emailForm, passwordForm, nameForm)
 					.then(() => {
 						updateProfile(auth.currentUser, { nameForm });
@@ -192,3 +196,12 @@ export const register = () => {
 	});
 	return registerDiv;
 };
+// const docRef = doc(getFirestore(), "document", auth.currentUser.uid);
+// const usersDocs = await setDoc(docRef, "documents", {
+// 	email: auth.currentUser.email,
+// 	userName: auth.currentUser.displayName,
+// 	uid: auth.currentUser.uid,
+// 	location: cityForm.value,
+// 	isVegan: document.querySelector("#selectVegan").value,
+// });
+// console.log(usersDocs);
