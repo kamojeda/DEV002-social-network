@@ -11,7 +11,7 @@ import {
 	orderBy,
 	giveLike,
 	dislike,
-	getPost,
+	getPost
 } from "../firebase/firestore-funct.js";
 import { postPrint } from "../components/post.js";
 
@@ -55,8 +55,8 @@ export const feed = () => {
 
 	feedDiv.appendChild(headerFeed);
 	headerFeed.appendChild(imgHeader);
-	headerFeed.appendChild(inputSearchHeader);
 	headerFeed.appendChild(buttonSignOut);
+	headerFeed.appendChild(inputSearchHeader);	
 	feedDiv.appendChild(newPostContainer);
 	newPostContainer.appendChild(formNewPostContainer);
 	formNewPostContainer.appendChild(inputNewPostLocation);

@@ -37,26 +37,42 @@
   font-family: var(--secundary-font-family);
 }
 
+textarea{
+  resize: none;
+}
+
 .headerFeed {
   grid-column-start: 1;
   grid-column-end: 4;
   /*grid-row: 1;*/
   height: fit-content;
   margin: 0;
-  padding: 10px;
+  padding: 10px 20px;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
   background-color: #201f1f;
+  align-items: center;  
 }
 
 .imgHeader {
-  width: 150px;
+  width: 60%;
+  height: auto;
+}
+
+.inputSearchHeader{
+  max-width: 70%;
+  height: 1rem;
+  padding: 10px;
+  border-radius: 50px;
+  border: 2px solid #84bf04;
 }
 
 .buttonSignOut {
   width: fit-content;
-  padding: 5px;
+  height: 2em;
+  padding: 0 1em;
   border-radius: 5px;
 }
 
