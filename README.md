@@ -37,11 +37,21 @@ Nuestro público objetivo y principales usuarios son:
 
 Desarrollamos las Historias de Usuario en base a las necesidades que pudimos observar y analizar de nuestro Público Objetivo.
 
-![HU1](src/img/HU1.png)
+![HU1](src/img/HU-1.png)
 
-![HU2](src/img/HU2.png)
+![HU2](src/img/HU-2.png)
 
-![HU3](src/img/HU3.png)
+![HU3](src/img/HU-3.png)
+
+![HU4](src/img/HU-4.png)
+
+![HU5](src/img/HU-5.png)
+
+![HU6](src/img/HU-6.png)
+
+![HU7](src/img/HU-7.png)
+
+![HU8](src/img/HU-8.png)
 
 ## **6. Diseño de la Interfaz de Usuario**
 
