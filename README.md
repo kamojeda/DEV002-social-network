@@ -79,6 +79,6 @@ Desarrollamos las Historias de Usuario en base a las necesidades que pudimos obs
 ![prototipo1](src/img/Proto_Alta.png)
 
 ### ***Prototipo Final Figma***
-* [Prototipo Mobile Figma](https://github.com/kamojeda/DEV002-data-lovers](https://www.figma.com/proto/c5574VMaGH6qSKo5ZCsE7W/Social-Network-Vegan?node-id=389%3A517&scaling=scale-down&page-id=38%3A2&starting-point-node-id=389%3A517)
+* [Prototipo Mobile Figma](https://www.figma.com/proto/c5574VMaGH6qSKo5ZCsE7W/Social-Network-Vegan?node-id=389%3A517&scaling=scale-down&page-id=38%3A2&starting-point-node-id=389%3A517)
 
 
