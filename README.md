@@ -1,6 +1,6 @@
-# Proyecto Red Social
+# *Proyecto Red Social
 
-#Veganship
+# *VeganShip - Red Social
 
 ## Índice
 
