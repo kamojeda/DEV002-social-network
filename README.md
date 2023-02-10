@@ -2,11 +2,16 @@
 
 ## Índice
 
-[1.¿Qué es una Red Social?](#1-¿que-es-una-red-social?)
-[2.¿Qué es Veganship?](#2-¿que-es-veganship?)
-[3.Objetivo de Veganship](#3-objetivos-de-veganship)
+[1.¿Qué es una Red Social?](#1-¿qué-es-una-red-social?)
+
+[2.¿Qué es Veganship?](#2-¿qué-es-veganship?)
+
+[3.Objetivo de Veganship](#3-objetivo-de-veganship)
+
 [4.Principales Usuarios](#4-principales-usuarios)
+
 [5.Historias de Usuarios](#5-historias-de-usuarios)
+
 [6.Diseño de la Interfaz de Usuario](#6-diseño-de-la-interfaz-de-usuario)
 
 ***
@@ -71,5 +76,7 @@ Desarrollamos las Historias de Usuario en base a las necesidades que pudimos obs
 
 ![prototipo1](src/img/Proto_Alta.png)
 
-### ***Prototipo Final***
+### ***Prototipo Final Figma***
+* [Prototipo Mobile Figma]([https://github.com/kamojeda/DEV002-data-lovers](https://www.figma.com/proto/c5574VMaGH6qSKo5ZCsE7W/Social-Network-Vegan?node-id=389%3A517&scaling=scale-down&page-id=38%3A2&starting-point-node-id=389%3A517))
+
 
